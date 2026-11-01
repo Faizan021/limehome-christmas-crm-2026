@@ -1,0 +1,2532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Limehome Christmas CRM 2026 — Interactive Case Study Cockpit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap');
+    
+    body { 
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; 
+      background: radial-gradient(circle at 50% 0%, #1e4b45 0%, #102e2b 30%, #091c1a 65%, #05100f 100%);
+      background-attachment: fixed;
+      color: #E2E8F0;
+      /* Text selection explicitly enabled! */
+      user-select: text !important;
+      -webkit-user-select: text !important;
+      overflow-x: hidden !important;
+      max-width: 100vw !important;
+    }
+    
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* Ambient Festive Winter Glow Orbs */
+    .festive-glow-1 {
+      position: absolute;
+      top: -10%;
+      left: 20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(45, 122, 115, 0.28) 0%, transparent 70%);
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .festive-glow-2 {
+      position: absolute;
+      top: 5%;
+      right: 15%;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, transparent 70%);
+      filter: blur(70px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Snowfall Canvas */
+    .snow-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    
+    /* Smooth fluid scrolling & clean scrollbars */
+    html { scroll-behavior: smooth; }
+    #mainCanvas, #scriptDrawer {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(16, 185, 129, 0.3) rgba(15, 23, 42, 0.4);
+    }
+    #mainCanvas::-webkit-scrollbar, #scriptDrawer::-webkit-scrollbar {
+      width: 6px;
+    }
+    #mainCanvas::-webkit-scrollbar-track, #scriptDrawer::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.4);
+    }
+    #mainCanvas::-webkit-scrollbar-thumb, #scriptDrawer::-webkit-scrollbar-thumb {
+      background-color: rgba(16, 185, 129, 0.3);
+      border-radius: 9999px;
+    }
+
+    /* Keyframe Animations */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(1deg); }
+    }
+    .animate-float {
+      animation: floatSlow 4s ease-in-out infinite;
+    }
+
+    @keyframes steamDrift {
+      0% { transform: translateY(0) scaleX(1); opacity: 0.8; }
+      50% { transform: translateY(-8px) scaleX(1.2); opacity: 0.4; }
+      100% { transform: translateY(-16px) scaleX(1.4); opacity: 0; }
+    }
+    .steam-line {
+      animation: steamDrift 1.8s linear infinite;
+    }
+
+    @keyframes rainShower {
+      0% { transform: translateY(0); opacity: 0; }
+      50% { opacity: 0.9; }
+      100% { transform: translateY(16px); opacity: 0; }
+    }
+    .water-drop-1 { animation: rainShower 1.1s ease-in infinite; }
+    .water-drop-2 { animation: rainShower 1.1s ease-in infinite 0.35s; }
+    .water-drop-3 { animation: rainShower 1.1s ease-in infinite 0.7s; }
+
+    @keyframes batteryWarn {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.96); }
+    }
+    .animate-battery {
+      animation: batteryWarn 1.2s ease-in-out infinite;
+    }
+
+    /* Glowing Accents */
+    .glow-teal { box-shadow: 0 0 35px rgba(45, 122, 115, 0.35); }
+    .glow-rose { box-shadow: 0 0 35px rgba(225, 29, 72, 0.35); }
+    .glow-gold { box-shadow: 0 0 30px rgba(245, 158, 11, 0.3); }
+
+    /* Active Nav Tab */
+    .active-festive-tab {
+      background: linear-gradient(135deg, #2D7A73 0%, #17423E 100%) !important;
+      color: #ffffff !important;
+      border-color: #34D399 !important;
+      box-shadow: 0 4px 18px rgba(52, 211, 153, 0.35);
+    }
+
+    .iphone-frame {
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 0 8px #1E293B, 0 0 0 10px #334155;
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none !important; }
+    .no-scrollbar { -ms-overflow-style: none !important; scrollbar-width: none !important; }
+
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+  </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden text-slate-100 relative selection:bg-emerald-500 selection:text-white">
+
+  <!-- Ambient Festive Winter Bokeh Orbs (Clipped) -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="festive-glow-1"></div>
+    <div class="festive-glow-2"></div>
+  </div>
+
+  <!-- Interactive Snowfall Canvas -->
+  <canvas id="snowCanvas" class="snow-canvas"></canvas>
+
+  <!-- Top Sticky Header Navigation -->
+  <header class="bg-[#081514]/98 border-b border-emerald-900/50 px-4 py-2 z-50 shrink-0 backdrop-blur-md relative shadow-lg">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2.5">
+      
+      <!-- Top Row on Mobile / Left on Desktop: Brand + Action Buttons -->
+      <div class="w-full md:w-auto flex items-center justify-between gap-3">
+        <div class="flex items-center space-x-2.5">
+          <div class="w-7 h-7 bg-emerald-600 text-white rounded-lg flex items-center justify-center font-black text-xs tracking-tighter shadow border border-emerald-400/30">
+            lh
+          </div>
+          <div>
+            <div class="text-[11px] font-black tracking-widest uppercase text-white font-mono flex items-center gap-1.5">
+              <span>LIMEHOME</span>
+              <span class="text-slate-600 font-normal">•</span>
+              <span class="text-emerald-400 font-semibold text-[10px]">Holiday Direct 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Controls (Visible on mobile right) -->
+        <div class="flex items-center space-x-1.5 md:hidden">
+          <button id="snowToggleBtnMob" onclick="toggleSnow()" class="text-[11px] bg-slate-800 text-emerald-400 px-2 py-1 rounded-lg border border-slate-700 font-mono">
+            ❄️
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs: Horizontal Scrollable on Mobile, Centered on Desktop -->
+      <nav class="w-full md:w-auto overflow-x-auto no-scrollbar flex items-center bg-slate-900/90 p-1 rounded-xl border border-slate-800 space-x-1 shrink-0" id="stageTabs">
+        <button onclick="switchTab(0)" class="stage-btn px-2.5 py-1 rounded-lg text-xs font-bold transition-all active-festive-tab whitespace-nowrap shrink-0" id="tab0">01 Idea</button>
+        <button onclick="switchTab(1)" class="stage-btn px-2.5 py-1 rounded-lg text-xs font-bold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap shrink-0" id="tab1">02 Objectives</button>
+        <button onclick="switchTab(2)" class="stage-btn px-2.5 py-1 rounded-lg text-xs font-bold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap shrink-0" id="tab2">03 Audience</button>
+        <button onclick="switchTab(3)" class="stage-btn px-2.5 py-1 rounded-lg text-xs font-bold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap shrink-0" id="tab3">04 Channels</button>
+        <button onclick="switchTab(4)" class="stage-btn px-2.5 py-1 rounded-lg text-xs font-bold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap shrink-0" id="tab4">05 Testing</button>
+        <button onclick="switchTab(5)" class="stage-btn px-2.5 py-1 rounded-lg text-xs font-bold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap shrink-0" id="tab5">06 Measurement</button>
+        <button onclick="switchTab(6)" class="stage-btn px-2.5 py-1 rounded-lg text-xs font-bold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap shrink-0" id="tab6">07 Collaboration</button>
+      </nav>
+
+      <!-- Desktop Action Controls -->
+      <div class="hidden md:flex items-center space-x-2">
+        <button id="snowToggleBtn" onclick="toggleSnow()" class="text-xs bg-slate-800 hover:bg-slate-700 text-emerald-400 hover:text-emerald-300 font-medium px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 border border-slate-700 shadow-sm" title="Toggle snowfall animation">
+          <span>❄️</span>
+          <span id="snowToggleLabel">Snow: On</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Viewport: Balanced 2-Column Edge-to-Edge Cockpit -->
+  <div class="flex-1 flex overflow-hidden relative z-10">
+    
+    <!-- Main Dynamic Stage Canvas -->
+    <main class="flex-1 overflow-y-auto px-4 py-3 md:px-6 md:py-3.5 space-y-3 scroll-smooth" id="mainCanvas">
+      <div id="interactiveContent" class="w-full max-w-7xl mx-auto space-y-3 pb-3">
+        <!-- Injected by JavaScript -->
+      </div>
+    </main>
+
+    <!-- Right Drawer: Spoken Words Teleprompter -->
+    <!-- Script Drawer Backdrop -->
+    
+
+  </div>
+
+  <!-- Global Footer Across Every Page / Stage -->
+  <footer class="bg-[#081514]/95 border-t border-emerald-900/40 px-6 py-2.5 flex items-center justify-between text-xs text-slate-400 z-50 shrink-0 backdrop-blur relative shadow-lg">
+    <div class="flex items-center space-x-3">
+      <div class="w-5 h-5 bg-[#2D7A73] text-white rounded flex items-center justify-center font-black text-[13px] shadow">lh</div>
+      <span class="text-slate-200 font-semibold text-xs">Limehome Christmas CRM Strategy 2026</span>
+      <span class="text-slate-600 hidden sm:inline">•</span>
+      <span class="text-emerald-400 font-mono text-[11px] hidden sm:inline">Direct Booking & Incrementality Model</span>
+    </div>
+    <div class="flex items-center space-x-4 font-mono text-[11px]">
+      <span class="text-slate-300">Prepared by <strong class="text-emerald-400">Faizan Ahmed</strong> — Candidate for CRM Manager (m/f/d)</span>
+      <span class="bg-emerald-950 text-emerald-300 border border-emerald-700/50 px-2.5 py-0.5 rounded text-[13px] hidden md:inline">Confidential Case Study</span>
+    </div>
+  </footer>
+
+  <script>
+    let currentStage = 0;
+    let isScriptOpen = false;
+
+    // The Master Interactive Database with Live Animations & Citation Links
+    const stages = [
+    // STAGE 0: CAMPAIGN IDEA & VALUE PROPOSITION
+    {
+      id: "dilemma",
+      title: "1. The Holiday Insight: Comfort for the Whole Family",
+      subtitle: "The holiday tension hotels ignore: celebrate with family all day, retreat to your own private apartment at night.",
+      html: `
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+          
+          <!-- Left Side: Persona & Market Proof (7 cols) -->
+          <div class="lg:col-span-7 bg-gradient-to-br from-[#163833] via-[#0E2320] to-[#121A19] p-5 rounded-3xl border border-emerald-500/30 shadow-xl flex flex-col justify-between space-y-4">
+            
+            <!-- Persona Header & Story -->
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-black uppercase tracking-wider text-amber-300 bg-amber-950/90 px-2.5 py-0.5 rounded-full border border-amber-600/50 font-mono">
+                  ✨ THE HOLIDAY GUEST EXPERIENCE
+                </span>
+                <span class="text-[11px] font-mono text-slate-300 bg-slate-900/80 px-2.5 py-0.5 rounded-full border border-slate-700">
+                  Jana, 34 · Hamburg ➔ Cologne
+                </span>
+              </div>
+
+              <div>
+                <h2 class="text-2xl font-black text-white leading-tight">
+                  "Family for the holidays. <br/><span class="text-emerald-400">Your own space for the night.</span>"
+                </h2>
+                <p class="text-xs text-slate-300 leading-relaxed mt-2">
+                  She loves Christmas dinner, family traditions, and being together. But she doesn't want to sleep on a squeaky fold-out sofa in her parents' living room. She wants a real bed, a hot shower, and a quiet morning.
+                </p>
+              </div>
+            </div>
+
+            <!-- Inline 3-Column Market Opportunity Strip -->
+            <div class="bg-[#081514] p-3.5 rounded-2xl border border-emerald-900/50 space-y-2.5">
+              <div class="flex items-center justify-between border-b border-emerald-900/40 pb-1.5">
+                <span class="text-xs font-bold text-amber-400 font-mono uppercase tracking-wider flex items-center gap-1.5">
+                  <span>💡</span> THE HOLIDAY ACCOMMODATION GAP (MARKET SIZING)
+                </span>
+                <span class="text-[11px] font-mono text-emerald-400">Validated Market Proof</span>
+              </div>
+
+              <div class="grid grid-cols-3 gap-2.5 text-center">
+                <div class="bg-slate-900/90 p-2.5 rounded-xl border border-slate-800">
+                  <div class="text-xl font-black text-white font-mono">21%</div>
+                  <div class="text-[11px] text-slate-300 font-bold mt-0.5">The Migration</div>
+                  <div class="text-[11px] text-slate-400 leading-tight mt-0.5">17M+ Germans travel home for Xmas</div>
+                </div>
+                <div class="bg-rose-950/40 p-2.5 rounded-xl border border-rose-800/50">
+                  <div class="text-xl font-black text-rose-400 font-mono">14%</div>
+                  <div class="text-[11px] text-rose-200 font-bold mt-0.5">Sofa Dilemma</div>
+                  <div class="text-[11px] text-rose-300/80 leading-tight mt-0.5">Hosts lack an extra private room</div>
+                </div>
+                <div class="bg-emerald-950/40 p-2.5 rounded-xl border border-emerald-800/50">
+                  <div class="text-xl font-black text-emerald-400 font-mono">10%</div>
+                  <div class="text-[11px] text-emerald-200 font-bold mt-0.5">Apartment Gap</div>
+                  <div class="text-[11px] text-emerald-300/80 leading-tight mt-0.5">Seek living space over sterile hotel</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Strategic Footnote Strip -->
+            <div class="p-2.5 bg-emerald-950/40 rounded-xl border border-emerald-800/40 text-[11px] text-emerald-200 flex items-center justify-between">
+              <span>🎯 <strong>THE LIMEHOME OPPORTUNITY:</strong> Design apartment suites offering privacy 10 min from family.</span>
+              <span class="text-[11px] font-mono text-emerald-400 shrink-0 ml-2">Aachen · Leipzig · Cologne</span>
+            </div>
+
+          </div>
+
+          <!-- Right Side: Animated Visual Scene Stage with Top Switcher (5 cols) -->
+          <div class="lg:col-span-5 flex flex-col justify-between space-y-3">
+            
+            <!-- Switcher Buttons on Top of Right Card -->
+            <div class="flex space-x-2 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800">
+              <button onclick="setDilemmaView('limehome')" id="btnLimehome" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all bg-emerald-600 text-white shadow-lg flex items-center justify-center gap-1.5 border border-emerald-400/40">
+                <span>✨</span> Your Own Space
+              </button>
+              <button onclick="setDilemmaView('sofa')" id="btnSofa" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center gap-1.5 border border-slate-700">
+                <span>🛋️</span> The Fold-Out Sofa
+              </button>
+            </div>
+
+            <!-- Dynamic Visual Card -->
+            <div id="dilemmaVisualScene" class="flex-1 bg-[#150F13] border-2 border-rose-500/40 rounded-3xl p-5 flex flex-col justify-between shadow-2xl transition-all duration-300 relative overflow-hidden">
+              <!-- Rendered dynamically by setDilemmaView() -->
+            </div>
+
+          </div>
+
+        </div>
+`,
+      script: ""
+    },
+
+    // STAGE 1: CAMPAIGN OBJECTIVES & STRATEGIC LEVERS
+    {
+      id: "objectives",
+      title: "2. Commercial Objectives & Strategic Levers",
+      subtitle: "Protecting 15–18% contribution margin by shifting OTA demand to direct channels without discounting.",
+      html: `
+        <div class="space-y-4">
+          <!-- Section Header: 3 Core Objectives -->
+          <div class="flex items-center justify-between border-b border-emerald-900/40 pb-2">
+            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider font-mono flex items-center gap-2">
+              <span>🎯</span> THREE MEASURABLE BUSINESS OBJECTIVES
+            </span>
+            <span class="text-[11px] bg-emerald-950 text-emerald-300 px-2.5 py-0.5 rounded font-mono border border-emerald-700/50">Commercial Focus</span>
+          </div>
+
+          <!-- 3 High-Impact Strategic Pillars -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <!-- Pillar 1: Profitability -->
+            <div class="bg-[#0C1A18]/90 border border-emerald-500/40 p-5 rounded-3xl space-y-3.5 shadow-lg flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-[11px] font-bold text-emerald-400 uppercase tracking-widest font-mono">01 · PROFITABILITY</span>
+                  <span class="text-[11px] bg-emerald-950 text-emerald-300 font-semibold px-2 py-0.5 rounded-full border border-emerald-700/50 font-mono">Direct Growth</span>
+                </div>
+                <div class="border-b border-emerald-900/40 pb-2.5">
+                  <div class="text-xs font-mono uppercase text-emerald-300/80 font-bold">Shift Bookings to Direct</div>
+                  <div class="text-xl font-black text-white mt-1">CUT THE OTA TAX</div>
+                  <div class="text-[13px] font-mono font-bold text-emerald-400 mt-1">OTA ➔ Direct (+15–18% Margin)</div>
+                </div>
+              </div>
+              <div class="space-y-2.5 text-xs text-slate-300">
+                <div class="flex items-start gap-2">
+                  <span class="text-emerald-400 font-bold shrink-0">💰</span>
+                  <span><strong>Bypass Commissions:</strong> Keep 15–18% third-party fees directly in contribution margin.</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-emerald-400 font-bold shrink-0">🤝</span>
+                  <span><strong>Guest Ownership:</strong> First-party CRM data to drive repeat stays across Europe.</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-emerald-400 font-bold shrink-0">⚖️</span>
+                  <span><strong>Parity Freedom:</strong> EU DMA rules allow exclusive direct perks without penalty.</span>
+                </div>
+              </div>
+              <div class="pt-2 border-t border-emerald-900/30 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+                <span class="inline-flex items-center text-slate-300 font-mono text-[11px] bg-slate-800/90 px-2 py-0.5 rounded border border-slate-700">EU DMA Compliance Citation</span>
+                <span class="text-emerald-400">Target: 35%+ Direct</span>
+              </div>
+            </div>
+
+            <!-- Pillar 2: Revenue & Yield -->
+            <div class="bg-[#0C1A18]/90 border border-emerald-500/40 p-5 rounded-3xl space-y-3.5 shadow-lg flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-[11px] font-bold text-amber-400 uppercase tracking-widest font-mono">02 · REVENUE & YIELD</span>
+                  <span class="text-[11px] bg-amber-950/80 text-amber-300 font-semibold px-2 py-0.5 rounded-full border border-amber-700/50 font-mono">Yield Shield</span>
+                </div>
+                <div class="border-b border-emerald-900/40 pb-2.5">
+                  <div class="text-xs font-mono uppercase text-amber-300/80 font-bold">Protect Daily Rates (ADR)</div>
+                  <div class="text-xl font-black text-white mt-1">SELL SLEEP, NOT DISCOUNTS</div>
+                  <div class="text-[13px] font-mono font-bold text-amber-400 mt-1">1 PM Checkout &gt; 15% Price Cuts</div>
+                </div>
+              </div>
+              <div class="space-y-2.5 text-xs text-slate-300">
+                <div class="flex items-start gap-2">
+                  <span class="text-amber-400 font-bold shrink-0">🎁</span>
+                  <span><strong>Perks Over Discounts:</strong> 1 PM checkout & holiday kits protect room rates from erosion.</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-amber-400 font-bold shrink-0">📈</span>
+                  <span><strong>Fill Gap Nights:</strong> 3-night minimum lengths of stay to support midweek occupancy.</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-amber-400 font-bold shrink-0">🚫</span>
+                  <span><strong>Zero Scarcity Gimmicks:</strong> Honest availability; no misleading countdown timers.</span>
+                </div>
+              </div>
+              <div class="pt-2 border-t border-emerald-900/30 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+                <span>Revenue Sync: Daily</span>
+                <span class="text-amber-400">Target: +12% RevPAR</span>
+              </div>
+            </div>
+
+            <!-- Pillar 3: Operations & Experience -->
+            <div class="bg-[#0C1A18]/90 border border-emerald-500/40 p-5 rounded-3xl space-y-3.5 shadow-lg flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-[11px] font-bold text-purple-400 uppercase tracking-widest font-mono">03 · GUEST OPERATIONS</span>
+                  <span class="text-[11px] bg-purple-950/80 text-purple-300 font-semibold px-2 py-0.5 rounded-full border border-purple-700/50 font-mono">Seamless Stay</span>
+                </div>
+                <div class="border-b border-emerald-900/40 pb-2.5">
+                  <div class="text-xs font-mono uppercase text-purple-300/80 font-bold">Flawless Holiday Arrival</div>
+                  <div class="text-xl font-black text-white mt-1">ZERO ARRIVAL DRAMA</div>
+                  <div class="text-[13px] font-mono font-bold text-purple-400 mt-1">First-Time PIN (&lt;0.08% SLA)</div>
+                </div>
+              </div>
+              <div class="space-y-2.5 text-xs text-slate-300">
+                <div class="flex items-start gap-2">
+                  <span class="text-purple-400 font-bold shrink-0">🔑</span>
+                  <span><strong>Automated Digital Access:</strong> Door PINs delivered 24h prior via WhatsApp/SMS.</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-purple-400 font-bold shrink-0">🛡️</span>
+                  <span><strong>Housekeeping Guard:</strong> Late checkouts capped per property to guard cleaning teams.</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-purple-400 font-bold shrink-0">⚡</span>
+                  <span><strong>Zero Queue:</strong> Instant keyless check-in during peak Christmas Eve rush.</span>
+                </div>
+              </div>
+              <div class="pt-2 border-t border-emerald-900/30 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+                <span>24/7 Digital Concierge</span>
+                <span class="text-purple-400">SLA: &lt;0.08% Escalations</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom: The Strategic Lever Comparison Strip -->
+          <div class="bg-[#0A1615] border border-emerald-500/30 p-4 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 text-xs shadow-lg">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">⚖️</span>
+              <div>
+                <span class="text-emerald-400 font-mono uppercase font-bold text-[11px] tracking-wider">THE STRATEGIC LEVER: PERKS VS. DISCOUNTS</span>
+                <div class="text-slate-300 text-xs mt-0.5">
+                  Slashing prices damages brand equity and trains guests to wait for sales. Offering <strong>1 PM Late Checkout (€4 marginal cost)</strong> delivers massive perceived value with zero ADR erosion.
+                </div>
+              </div>
+            </div>
+            <div class="shrink-0 flex items-center gap-2">
+              <span class="bg-emerald-950 text-emerald-300 font-mono text-[11px] font-bold px-3 py-1.5 rounded-xl border border-emerald-700/60">
+                High Perceived Value · Protected Margin
+              </span>
+            </div>
+          </div>
+        </div>
+`,
+      script: ""
+    },
+
+    // STAGE 2: AUDIENCE STRATEGY & SUPPRESSION
+    {
+      id: "filterlab",
+      title: "3. Audience Strategy: Reach the Right Guests, Protect the Margin",
+      subtitle: "Targeting high-intent travellers while shielding our margin and deliverability with strict exclusion rules.",
+      html: `
+        <div class="space-y-4">
+          <!-- Side-by-Side: Priority Audiences vs Audience Exclusions -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            
+            <!-- Left: STEP 01 · THREE PRIORITY AUDIENCES -->
+            <div class="bg-[#0C1A18]/90 border border-emerald-500/40 p-5 rounded-3xl space-y-3.5 shadow-xl flex flex-col justify-between">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between border-b border-emerald-900/40 pb-2">
+                  <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest font-mono flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> STEP 01 · THREE PRIORITY AUDIENCES
+                  </span>
+                  <span class="text-[11px] bg-emerald-950 text-emerald-300 font-semibold px-2.5 py-0.5 rounded-full font-mono border border-emerald-700/60">Target Cohorts</span>
+                </div>
+
+                <div class="space-y-3 text-xs">
+                  <!-- Cohort 1 -->
+                  <div class="bg-[#081514] p-3.5 rounded-2xl border border-emerald-900/40 space-y-1.5 hover:border-emerald-500/50 transition-all">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-2">
+                        <span class="text-sm">🛋️</span>
+                        <span class="font-extrabold text-white text-[13px]">1. THE HOMECOMERS · Sofa Sleepers</span>
+                      </div>
+                      <span class="text-[11px] bg-emerald-950/80 text-emerald-300 font-bold px-2 py-0.5 rounded-full font-mono border border-emerald-700/40">Family Visits</span>
+                    </div>
+                    <p class="text-slate-300 text-xs leading-relaxed">
+                      Young professionals visiting parents in secondary cities (Aachen, Leipzig, Essen). Need real beds, quiet sleep, and fast Wi-Fi.
+                    </p>
+                    <div class="text-[11px] text-emerald-400 font-mono font-semibold pt-1 border-t border-slate-800">
+                      Strategy: Promote 3+ night stays around Dec 24–26 to fill off-peak midweek nights.
+                    </div>
+                  </div>
+
+                  <!-- Cohort 2 -->
+                  <div class="bg-[#081514] p-3.5 rounded-2xl border border-emerald-900/40 space-y-1.5 hover:border-sky-500/50 transition-all">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-2">
+                        <span class="text-sm">🎄</span>
+                        <span class="font-extrabold text-white text-[13px]">2. THE GLÜHWEIN WEEKENDERS · City Breaks</span>
+                      </div>
+                      <span class="text-[11px] bg-sky-950/80 text-sky-300 font-bold px-2 py-0.5 rounded-full font-mono border border-sky-700/40">City Breaks</span>
+                    </div>
+                    <p class="text-slate-300 text-xs leading-relaxed">
+                      Couples and friends booking festive getaways near famous Christmas markets (Nuremberg, Dresden, Vienna).
+                    </p>
+                    <div class="text-[11px] text-sky-400 font-mono font-semibold pt-1 border-t border-slate-800">
+                      Strategy: Curate seasonal neighbourhood guides to drive high weekend average daily rates.
+                    </div>
+                  </div>
+
+                  <!-- Cohort 3 -->
+                  <div class="bg-[#081514] p-3.5 rounded-2xl border border-emerald-900/40 space-y-1.5 hover:border-amber-500/50 transition-all">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-2">
+                        <span class="text-sm">🔄</span>
+                        <span class="font-extrabold text-white text-[13px]">3. THE DIRECT CONVERTS · Past OTA Guests</span>
+                      </div>
+                      <span class="text-[11px] bg-amber-950/80 text-amber-300 font-bold px-2 py-0.5 rounded-full font-mono border border-amber-700/40">Consented Past Guests</span>
+                    </div>
+                    <p class="text-slate-300 text-xs leading-relaxed">
+                      Past guests who previously booked via Booking.com/Expedia with valid GDPR marketing consent.
+                    </p>
+                    <div class="text-[11px] text-amber-400 font-mono font-semibold pt-1 border-t border-slate-800">
+                      Strategy: Offer exclusive direct perks (1 PM checkout, Glühwein kit) rather than repeat OTA fees.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: STEP 02 · FOUR MARGIN & RISK SHIELDS -->
+            <div class="bg-[#1C1014]/90 border border-rose-500/40 p-5 rounded-3xl space-y-3.5 shadow-xl flex flex-col justify-between">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between border-b border-rose-900/40 pb-2">
+                  <span class="text-xs font-bold text-rose-400 uppercase tracking-widest font-mono flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span> STEP 02 · FOUR MARGIN &amp; RISK SHIELDS
+                  </span>
+                  <span class="text-[11px] bg-rose-950 text-rose-300 font-semibold px-2.5 py-0.5 rounded-full font-mono border border-rose-700/60">Zero Waste Sends</span>
+                </div>
+
+                <div class="space-y-2.5 text-xs">
+                  <!-- Shield 1 -->
+                  <div class="bg-[#140A0E] p-3 rounded-2xl border border-rose-900/40 flex items-start justify-between gap-3 hover:border-rose-600/50 transition-all">
+                    <div class="flex items-start gap-2.5">
+                      <span class="text-rose-400 text-sm mt-0.5">🛑</span>
+                      <div>
+                        <div class="font-extrabold text-white text-xs">1. ALREADY BOOKED GUESTS</div>
+                        <div class="text-slate-300 text-xs mt-0.5">Instant suppression. Never send acquisition offers to confirmed guests. Essential arrival guidance sent separately.</div>
+                      </div>
+                    </div>
+                    <span class="text-[11px] bg-rose-950/80 text-rose-300 font-mono font-bold px-2 py-0.5 rounded border border-rose-800 shrink-0">Consent Guard</span>
+                  </div>
+
+                  <!-- Shield 2 -->
+                  <div class="bg-[#140A0E] p-3 rounded-2xl border border-rose-900/40 flex items-start justify-between gap-3 hover:border-rose-600/50 transition-all">
+                    <div class="flex items-start gap-2.5">
+                      <span class="text-amber-400 text-sm mt-0.5">🧹</span>
+                      <div>
+                        <div class="font-extrabold text-white text-xs">2. UNSUBSCRIBED &amp; OPTED-OUT</div>
+                        <div class="text-slate-300 text-xs mt-0.5">1-click unsubscribe honored immediately across Braze and email. Zero marketing sent without valid opt-in.</div>
+                      </div>
+                    </div>
+                    <span class="text-[11px] bg-amber-950/80 text-amber-300 font-mono font-bold px-2 py-0.5 rounded border border-amber-800 shrink-0">Hygiene Filter</span>
+                  </div>
+
+                  <!-- Shield 3 -->
+                  <div class="bg-[#140A0E] p-3 rounded-2xl border border-rose-900/40 flex items-start justify-between gap-3 hover:border-rose-600/50 transition-all">
+                    <div class="flex items-start gap-2.5">
+                      <span class="text-sky-400 text-sm mt-0.5">📈</span>
+                      <div>
+                        <div class="font-extrabold text-white text-xs">3. HIGH OCCUPANCY PROPERTIES (&gt;85%)</div>
+                        <div class="text-slate-300 text-xs mt-0.5">Automatically stop marketing sends when properties sell out naturally. Protect pricing power &amp; peak ADR.</div>
+                      </div>
+                    </div>
+                    <span class="text-[11px] bg-sky-950/80 text-sky-300 font-mono font-bold px-2 py-0.5 rounded border border-sky-800 shrink-0">Yield Shield</span>
+                  </div>
+
+                  <!-- Shield 4 -->
+                  <div class="bg-[#140A0E] p-3 rounded-2xl border border-rose-900/40 flex items-start justify-between gap-3 hover:border-rose-600/50 transition-all">
+                    <div class="flex items-start gap-2.5">
+                      <span class="text-slate-400 text-sm mt-0.5">📉</span>
+                      <div>
+                        <div class="font-extrabold text-white text-xs">4. DORMANT CONTACTS (90D+ INACTIVE)</div>
+                        <div class="text-slate-300 text-xs mt-0.5">Exclude unengaged subscribers from routine campaigns to protect domain sender reputation and inbox delivery.</div>
+                      </div>
+                    </div>
+                    <span class="text-[11px] bg-slate-800 text-slate-300 font-mono font-bold px-2 py-0.5 rounded border border-slate-700 shrink-0">List Health</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom: Decision Rule -->
+          <div class="bg-gradient-to-r from-[#0B1E1C] via-[#0E2926] to-[#0A1816] border border-emerald-500/40 p-3.5 rounded-2xl shadow-xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            <div class="flex items-center gap-2.5">
+              <span class="text-xl">💡</span>
+              <div>
+                <span class="text-emerald-300 font-bold font-mono uppercase text-xs tracking-wider">DECISION RULE · RELEVANCE OVER VOLUME</span>
+                <span class="text-slate-300 text-xs ml-2">A past booking is a signal, not an automatic permit. We protect guest trust and deliverability over bulk send volume.</span>
+              </div>
+            </div>
+            <span class="bg-emerald-950 px-2.5 py-1 rounded-xl border border-emerald-700/60 font-mono text-[11px] text-emerald-300 font-bold shrink-0">
+              Monitoring SLA: Spam &lt;0.08%
+            </span>
+          </div>
+        </div>
+`,
+      script: ""
+    },
+
+    // STAGE 3: TIMING & CHANNELS (PHONE SIMULATOR)
+    {
+      id: "phonesim",
+      title: "4. Timing & Channels: The Right Message at the Right Moment",
+      subtitle: "A 3-act narrative: awaken early intent, close active consideration, and deliver flawless arrival.",
+      html: `
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 h-full items-stretch">
+          
+          <!-- Left Col: 3 Waves & 4 Channels (7 cols) -->
+          <div class="lg:col-span-7 flex flex-col justify-between space-y-3.5">
+            
+            <!-- 3-Wave Timeline Card (Interactive Click to Preview) -->
+            <div class="bg-[#0C1A18]/90 border border-emerald-500/30 p-4 rounded-3xl space-y-2.5 shadow-lg">
+              <div class="flex items-center justify-between border-b border-emerald-900/40 pb-1.5">
+                <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider font-mono flex items-center gap-1.5">
+                  <span>📅</span> THREE WAVES OF GUEST COMMUNICATION (CLICK TO PREVIEW)
+                </span>
+                <span class="text-[11px] bg-emerald-950 text-emerald-300 px-2.5 py-0.5 rounded font-mono border border-emerald-800">3-Act Narrative</span>
+              </div>
+
+              <div class="grid grid-cols-3 gap-2.5 text-xs">
+                <!-- Wave 1 -->
+                <div onclick="previewChannel('email')" class="bg-[#081514] p-3 rounded-2xl border border-emerald-500/30 space-y-1.5 flex flex-col justify-between cursor-pointer hover:border-emerald-400 transition-all hover:bg-slate-900/60" title="Click to preview Email">
+                  <div>
+                    <div class="flex items-center justify-between text-[11px] font-mono">
+                      <span class="text-emerald-400 font-bold">WAVE 01</span>
+                      <span class="text-slate-400">Nov 15–22</span>
+                    </div>
+                    <div class="font-bold text-white text-xs mt-1">Act I: Awaken Intent</div>
+                    <div class="text-slate-300 text-xs mt-0.5 leading-snug">Inspire early bookers before dates and suites vanish.</div>
+                  </div>
+                  <div class="pt-1.5 border-t border-slate-800 text-[11px] font-mono">
+                    <span class="text-emerald-300">✉️ Email + Push</span>
+                  </div>
+                </div>
+
+                <!-- Wave 2 -->
+                <div onclick="previewChannel('iam')" class="bg-[#081514] p-3 rounded-2xl border border-sky-500/30 space-y-1.5 flex flex-col justify-between cursor-pointer hover:border-sky-400 transition-all hover:bg-slate-900/60" title="Click to preview In-App Modal">
+                  <div>
+                    <div class="flex items-center justify-between text-[11px] font-mono">
+                      <span class="text-sky-400 font-bold">WAVE 02</span>
+                      <span class="text-slate-400">Dec 05–12</span>
+                    </div>
+                    <div class="font-bold text-white text-xs mt-1">Act II: Close Decision</div>
+                    <div class="text-slate-300 text-xs mt-0.5 leading-snug">Nudge searchers with 1 PM checkout perks without price discounting.</div>
+                  </div>
+                  <div class="pt-1.5 border-t border-slate-800 text-[11px] font-mono">
+                    <span class="text-sky-300">📲 In-App + Push</span>
+                  </div>
+                </div>
+
+                <!-- Wave 3 -->
+                <div onclick="previewChannel('wa')" class="bg-[#081514] p-3 rounded-2xl border border-purple-500/30 space-y-1.5 flex flex-col justify-between cursor-pointer hover:border-purple-400 transition-all hover:bg-slate-900/60" title="Click to preview WhatsApp">
+                  <div>
+                    <div class="flex items-center justify-between text-[11px] font-mono">
+                      <span class="text-purple-400 font-bold">WAVE 03</span>
+                      <span class="text-slate-400">Dec 20–24</span>
+                    </div>
+                    <div class="font-bold text-white text-xs mt-1">Act III: Open the Door</div>
+                    <div class="text-slate-300 text-xs mt-0.5 leading-snug">Door PIN codes, access guides, and zero promotional spam.</div>
+                  </div>
+                  <div class="pt-1.5 border-t border-slate-800 text-[11px] font-mono">
+                    <span class="text-purple-300">💬 WhatsApp + GuestHub</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Four Channels, Four Distinct Roles -->
+            <div class="bg-[#0C1514] border border-slate-800 p-4 rounded-3xl space-y-2.5">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-1.5">
+                <span class="text-xs font-bold text-slate-300 uppercase tracking-wider font-mono flex items-center gap-1.5">
+                  <span>📱</span> FOUR CHANNELS, FOUR DISTINCT ROLES
+                </span>
+                <span class="text-[11px] text-slate-400 font-mono">Permission-led Architecture</span>
+              </div>
+
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                  <div onclick="previewChannel('email')" class="bg-slate-900/80 hover:bg-slate-900 p-2.5 rounded-2xl border border-slate-800 hover:border-emerald-500/60 space-y-1 cursor-pointer transition-all hover:scale-[1.02] shadow-sm" title="Click to preview Email campaign">
+                    <div class="font-bold text-white flex items-center gap-1.5 text-xs"><span class="text-emerald-400">✉️</span> Email</div>
+                    <div class="text-[10px] text-emerald-400 uppercase font-mono font-bold">INSPIRE</div>
+                    <div class="text-slate-300 text-[11px] leading-tight">Editorial storytelling & direct perks.</div>
+                  </div>
+
+                  <div onclick="previewChannel('push')" class="bg-slate-900/80 hover:bg-slate-900 p-2.5 rounded-2xl border border-slate-800 hover:border-sky-500/60 space-y-1 cursor-pointer transition-all hover:scale-[1.02] shadow-sm" title="Click to preview Push notification">
+                    <div class="font-bold text-sky-400 flex items-center gap-1.5 text-xs"><span>🔔</span> Push</div>
+                    <div class="text-[10px] text-sky-400 uppercase font-mono font-bold">RE-ENGAGE</div>
+                    <div class="text-slate-300 text-[11px] leading-tight">Geo-targeted lockscreen reminders.</div>
+                  </div>
+
+                  <div onclick="previewChannel('iam')" class="bg-slate-900/80 hover:bg-slate-900 p-2.5 rounded-2xl border border-slate-800 hover:border-purple-500/60 space-y-1 cursor-pointer transition-all hover:scale-[1.02] shadow-sm" title="Click to preview In-App modal">
+                    <div class="font-bold text-purple-400 flex items-center gap-1.5 text-xs"><span>📱</span> In-App</div>
+                    <div class="text-[10px] text-purple-400 uppercase font-mono font-bold">CONVERT</div>
+                    <div class="text-slate-300 text-[11px] leading-tight">1 PM late checkout modal in GuestHub.</div>
+                  </div>
+
+                  <div onclick="previewChannel('wa')" class="bg-slate-900/80 hover:bg-slate-900 p-2.5 rounded-2xl border border-slate-800 hover:border-emerald-500/60 space-y-1 cursor-pointer transition-all hover:scale-[1.02] shadow-sm" title="Click to preview WhatsApp flow">
+                    <div class="font-bold text-emerald-400 flex items-center gap-1.5 text-xs"><span>💬</span> WhatsApp</div>
+                    <div class="text-[10px] text-emerald-400 uppercase font-mono font-bold">ARRIVAL</div>
+                    <div class="text-slate-300 text-[11px] leading-tight">Digital door PINs & arrival guide.</div>
+                  </div>
+                </div>
+              </div>
+              <!-- The Channel Principle Banner -->
+            <div class="bg-[#081514] border border-emerald-900/50 p-3 rounded-2xl flex items-center justify-between text-xs shadow">
+              <div class="flex items-center gap-2">
+                <span class="text-lg">💡</span>
+                <div>
+                  <span class="text-emerald-300 font-bold font-mono uppercase text-[11px] tracking-wide">RELEVANCE BEFORE FREQUENCY:</span>
+                  <span class="text-slate-300 text-xs ml-1">Operational peace before upselling. Every send has an explicit purpose and 1-click opt-out.</span>
+                </div>
+              </div>
+              <span class="text-[11px] font-mono text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800 shrink-0">Governance</span>
+            </div>
+
+          </div>
+
+          <!-- Right Col: Interactive Smartphone Simulator (5 cols) -->
+            <div class="lg:col-span-5 h-full flex flex-col justify-between space-y-2">
+              <!-- Channel Tab Buttons: Premium Segmented Controls -->
+              <div class="grid grid-cols-4 gap-1.5 bg-[#081514] p-1.5 rounded-2xl border border-emerald-900/50 shadow-inner">
+                <button onclick="previewChannel('email')" id="btnChanEmail" class="py-2 px-1 rounded-xl text-xs font-bold transition-all bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md flex items-center justify-center gap-1.5 border border-emerald-400/40">
+                  <span>✉️</span> Email
+                </button>
+                <button onclick="previewChannel('push')" id="btnChanPush" class="py-2 px-1 rounded-xl text-xs font-bold transition-all bg-slate-900/80 text-slate-300 hover:bg-slate-800 flex items-center justify-center gap-1.5 border border-slate-800">
+                  <span>🔔</span> Push
+                </button>
+                <button onclick="previewChannel('iam')" id="btnChanIam" class="py-2 px-1 rounded-xl text-xs font-bold transition-all bg-slate-900/80 text-slate-300 hover:bg-slate-800 flex items-center justify-center gap-1.5 border border-slate-800">
+                  <span>📱</span> In-App
+                </button>
+                <button onclick="previewChannel('wa')" id="btnChanWa" class="py-2 px-1 rounded-xl text-xs font-bold transition-all bg-slate-900/80 text-slate-300 hover:bg-slate-800 flex items-center justify-center gap-1.5 border border-slate-800">
+                  <span>💬</span> WhatsApp
+                </button>
+              </div>
+
+              <!-- Phone Frame (Ultra-Sleek iPhone 16 Pro Titanium Mockup) -->
+              <div class="flex-1 flex items-center justify-center py-0.5">
+                <div class="w-[305px] h-[505px] max-h-[66vh] bg-[#000000] border-[6px] border-[#2A3439] rounded-[42px] shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_0_1px_rgba(255,255,255,0.08)] relative overflow-hidden flex flex-col p-2 space-y-1">
+                  
+                  <!-- Dynamic Island Header Bar -->
+                  <div class="flex items-center justify-between px-3 pt-1 text-[10px] text-white/80 font-semibold select-none shrink-0">
+                    <span class="font-mono text-[10px]">09:41</span>
+                    <!-- Dynamic Island Capsule -->
+                    <div class="w-20 h-4 bg-black rounded-full flex items-center justify-between px-2 border border-white/10 shadow-inner">
+                      <div class="w-1.5 h-1.5 rounded-full bg-emerald-500/80"></div>
+                      <div class="w-2 h-2 rounded-full bg-[#1C2024] border border-white/20"></div>
+                    </div>
+                    <!-- Right Status Icons -->
+                    <div class="flex items-center gap-1 font-mono text-[9px]">
+                      <span>5G</span>
+                      <div class="w-3.5 h-2 border border-white/60 rounded-sm p-0.2 flex items-center"><div class="w-full h-full bg-white rounded-2xs"></div></div>
+                    </div>
+                  </div>
+
+                  <!-- Phone Screen Dynamic Payload Canvas -->
+                  <div id="phoneScreenContent" class="flex-1 overflow-y-auto no-scrollbar space-y-2 text-xs rounded-2xl">
+                    <!-- Rendered dynamically by previewChannel() -->
+                  </div>
+
+                  <!-- Home Indicator Bar -->
+                  <div class="w-24 h-1 bg-white/30 rounded-full mx-auto my-0.5 shrink-0"></div>
+                </div>
+              </div>
+              
+              <div id="simulatorChannelTag" class="text-center text-xs font-mono text-slate-300 bg-slate-900/60 py-1 px-2.5 rounded-lg border border-slate-800 truncate">
+                <span class="text-emerald-400 font-bold">WAVE 01 & 02 HERO EMAIL</span> · Personalized Holiday Editorial (Klaviyo / Braze Responsive HTML)
+              </div>
+            </div>
+
+        </div>
+`,
+      script: ""
+    },
+
+    // STAGE 4: EXPERIMENTATION & WHAT WE HOPE TO LEARN
+      {
+        id: "abtest",
+        title: "5. Experimentation: What We Test & What We Hope to Learn",
+        subtitle: "Interactive A/B Lab: Three commercial experiments to prove direct incrementality without margin discounting.",
+        html: `
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-stretch h-full">
+            
+            <!-- Left Col (5 cols): The 3 Experiment Selectors + Statistical Rigor -->
+            <div class="lg:col-span-5 flex flex-col justify-between space-y-2">
+              
+              <!-- Experiment 01 Selector Card -->
+              <div onclick="selectExperiment('offer', 'A')" id="expCardOffer" class="p-2.5 sm:p-3 rounded-2xl border transition-all cursor-pointer bg-slate-800/90 border-slate-400 text-white shadow-md flex flex-col justify-between space-y-1 hover:scale-[1.01]">
+                <div class="flex items-center justify-between">
+                  <span class="text-[9.5px] font-mono font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                    EXPERIMENT 01 · OFFER
+                  </span>
+                  <span class="text-[9px] font-mono bg-slate-900 text-slate-300 px-2 py-0.2 rounded-full border border-slate-700 font-bold uppercase">Offer Test</span>
+                </div>
+                <div class="text-xs font-black text-white">Value Perk vs. Price Slashing</div>
+                <div class="text-[10.5px] text-slate-300 leading-snug">Can guaranteed 1 PM check-out beat a 15% discount while protecting €18/nt margin?</div>
+                <div class="pt-1 border-t border-slate-700/60 flex items-center justify-between text-[9.5px] font-mono text-slate-400">
+                  <span>🎯 Primary: Net Margin Lift</span>
+                  <span class="font-bold text-emerald-400">Active Test →</span>
+                </div>
+              </div>
+
+              <!-- Experiment 02 Selector Card -->
+              <div onclick="selectExperiment('creative', 'A')" id="expCardCreative" class="p-2.5 sm:p-3 rounded-2xl border transition-all cursor-pointer bg-slate-900/80 border-slate-800 text-slate-300 flex flex-col justify-between space-y-1 hover:border-slate-700 hover:scale-[1.01]">
+                <div class="flex items-center justify-between">
+                  <span class="text-[9.5px] font-mono font-bold text-sky-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                    EXPERIMENT 02 · CREATIVE
+                  </span>
+                  <span class="text-[9px] font-mono bg-slate-900 text-slate-300 px-2 py-0.2 rounded-full border border-slate-700 font-bold uppercase">Creative Test</span>
+                </div>
+                <div class="text-xs font-black text-white">Emotional Dilemma vs. Feature Specs</div>
+                <div class="text-[10.5px] text-slate-300 leading-snug">Does solving the fold-out sofa anxiety convert higher than listing room amenities?</div>
+                <div class="pt-1 border-t border-slate-800 flex items-center justify-between text-[9.5px] font-mono text-slate-400">
+                  <span>🎯 Primary: Click-to-Book CVR</span>
+                  <span class="font-bold">Explore Test →</span>
+                </div>
+              </div>
+
+              <!-- Experiment 03 Selector Card -->
+              <div onclick="selectExperiment('friction', 'A')" id="expCardFriction" class="p-2.5 sm:p-3 rounded-2xl border transition-all cursor-pointer bg-slate-900/80 border-slate-800 text-slate-300 flex flex-col justify-between space-y-1 hover:border-slate-700 hover:scale-[1.01]">
+                <div class="flex items-center justify-between">
+                  <span class="text-[9.5px] font-mono font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                    EXPERIMENT 03 · FRICTION
+                  </span>
+                  <span class="text-[9px] font-mono bg-slate-900 text-slate-300 px-2 py-0.2 rounded-full border border-slate-700 font-bold uppercase">Journey Test</span>
+                </div>
+                <div class="text-xs font-black text-white">1-Click Saved Checkout vs. Search Page</div>
+                <div class="text-[10.5px] text-slate-300 leading-snug">Does pre-populating Cologne dates in GuestHub eliminate drop-off vs blank search?</div>
+                <div class="pt-1 border-t border-slate-800 flex items-center justify-between text-[9.5px] font-mono text-slate-400">
+                  <span>🎯 Primary: Checkout Completion</span>
+                  <span class="font-bold">Explore Test →</span>
+                </div>
+              </div>
+
+              <!-- Compact Statistical Governance Strip -->
+              <div class="bg-[#081514] p-2 rounded-xl border border-slate-800 space-y-1 text-xs">
+                <div class="flex items-center justify-between font-mono text-[10px]">
+                  <span class="text-slate-300 font-bold flex items-center gap-1">
+                    <span>🛡️</span> STATISTICAL RIGOR &amp; GOVERNANCE
+                  </span>
+                  <span class="text-slate-400">50/50 Split · 95% Conf.</span>
+                </div>
+                <div class="grid grid-cols-2 gap-1.5 font-mono text-[9px] text-center">
+                  <div class="bg-slate-900/90 py-1 px-1.5 rounded border border-slate-800 text-slate-300">
+                    <span class="text-white font-bold">15,000 / cell</span> (30k Total)
+                  </div>
+                  <div class="bg-slate-900/90 py-1 px-1.5 rounded border border-slate-800 text-slate-300">
+                    Circuit-Breaker: <span class="text-white font-bold">&gt;0.08% Opt-out</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Right Col (7 cols): The Live Interactive A/B Treatment Stage -->
+            <div class="lg:col-span-7 flex flex-col justify-between space-y-2 bg-[#091513] p-3.5 rounded-2xl border border-slate-800 shadow-xl relative overflow-hidden">
+              
+              <!-- Top Stage Header & Variant Toggle Buttons -->
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-2 border-b border-slate-800/80 shrink-0">
+                <div class="pl-0.5">
+                  <div class="text-[9.5px] font-mono text-slate-400 uppercase tracking-wider font-bold" id="stageExpSubtitle">OFFER STRATEGY TEST · TESTING GUEST VALUE SENSITIVITY</div>
+                  <div class="text-xs sm:text-sm font-black text-white" id="stageExpTitle">Test 01: Value Perk Model vs. Price Discount Model</div>
+                </div>
+
+                <!-- Neutral Variant A / Variant B Switcher Toggle -->
+                <div class="flex items-center space-x-1 bg-slate-950 p-1 rounded-xl border border-slate-800 shrink-0">
+                  <button onclick="switchExperimentVariant('A')" id="btnExpVarA" class="px-3 py-1 rounded-lg text-xs font-bold transition-all bg-slate-200 text-slate-950 shadow-md flex items-center gap-1 border border-white">
+                    <span>✨</span> Variant A
+                  </button>
+                  <button onclick="switchExperimentVariant('B')" id="btnExpVarB" class="px-3 py-1 rounded-lg text-xs font-bold transition-all bg-slate-900 hover:bg-slate-800 text-slate-400 flex items-center gap-1 border border-slate-800">
+                    <span>🏷️</span> Variant B
+                  </button>
+                </div>
+              </div>
+
+              <!-- Main Visual Simulation Canvas -->
+              <div id="expVisualCanvas" class="flex-1 my-0.5 flex flex-col justify-center">
+                <!-- Rendered dynamically by renderExperimentView() -->
+              </div>
+
+              <!-- Bottom Commercial Decision & Economic Value Strip -->
+              <div id="expDecisionStrip" class="p-2.5 bg-slate-950/90 rounded-xl border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs shrink-0">
+                <!-- Rendered dynamically by renderExperimentView() -->
+              </div>
+
+            </div>
+
+          </div>
+  `,
+        script: ""
+      },
+  
+      // STAGE 5: OMNICHANNEL MEASUREMENT SCORECARD
+    {
+      id: "measurement",
+      title: "6. Measure Incremental Bookings, Not Just Attributed Conversions",
+      subtitle: "Proving causal lift: we measure the bookings we actually caused, not the bookings that would have happened anyway.",
+      html: `
+        <div class="space-y-3.5">
+          
+          <!-- 01 · Incrementality Engine (Illustrative Model) -->
+          <div class="bg-[#0C1A18] border border-emerald-500/30 rounded-2xl p-4 shadow-lg space-y-3">
+            <div class="flex flex-wrap items-center justify-between pb-2 border-b border-emerald-900/40 gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-bold font-mono text-emerald-400 uppercase tracking-wider">01 · INCREMENTALITY ENGINE</span>
+                <span class="text-[11px] bg-emerald-950 text-emerald-300 border border-emerald-700/60 font-bold px-2 py-0.5 rounded-full font-mono uppercase tracking-wider">ILLUSTRATIVE MODEL</span>
+              </div>
+              <span class="text-[13px] font-mono text-slate-400">10% randomized holdout · Measure the bookings caused by the strategy</span>
+            </div>
+
+            <!-- 4-Column Mathematical Flow -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-stretch">
+              
+              <!-- 1. Messaged Group -->
+              <div class="bg-[#061211] p-3 rounded-xl border border-slate-800 flex flex-col justify-between space-y-1">
+                <span class="text-[11px] font-mono text-slate-400 uppercase tracking-wider font-bold">MESSAGED GROUP</span>
+                <div class="my-0.5">
+                  <div class="text-2xl font-black text-white font-mono">90,000</div>
+                  <div class="text-xs font-semibold text-emerald-400 font-mono">3.2% booking rate</div>
+                </div>
+                <div class="text-[11px] text-slate-300 border-t border-slate-800/80 pt-1 font-mono">
+                  <strong>2,880 bookings</strong>
+                </div>
+              </div>
+
+              <!-- 2. Holdout Group -->
+              <div class="bg-[#061211] p-3 rounded-xl border border-amber-500/30 flex flex-col justify-between space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="text-[11px] font-mono text-amber-400 uppercase tracking-wider font-bold">HOLDOUT GROUP</span>
+                  <span class="text-[11px] bg-amber-950 text-amber-300 px-1.5 py-0.2 rounded font-mono">10% CONTROL</span>
+                </div>
+                <div class="my-0.5">
+                  <div class="text-2xl font-black text-white font-mono">10,000</div>
+                  <div class="text-xs font-semibold text-amber-400 font-mono">2.0% booking rate</div>
+                </div>
+                <div class="text-[11px] text-slate-300 border-t border-slate-800/80 pt-1 font-mono">
+                  <strong>200 bookings</strong> <span class="text-slate-400">(equiv. 1,800 / 90k)</span>
+                </div>
+              </div>
+
+              <!-- 3. Estimated Incremental Bookings -->
+              <div class="bg-[#081F1B] p-3 rounded-xl border border-emerald-500/40 flex flex-col justify-between space-y-1 shadow-sm">
+                <span class="text-[11px] font-mono text-emerald-400 uppercase tracking-wider font-bold">ESTIMATED INCREMENTAL BOOKINGS</span>
+                <div class="my-0.5">
+                  <div class="text-2xl font-black text-emerald-300 font-mono">+1,080</div>
+                  <div class="text-xs font-semibold text-emerald-200 font-mono">+1.2 percentage points</div>
+                </div>
+                <div class="text-[11px] text-emerald-300/80 border-t border-emerald-900/60 pt-1">
+                  Above organic baseline
+                </div>
+              </div>
+
+              <!-- 4. Illustrative Incremental Booking Value -->
+              <div class="bg-gradient-to-br from-[#0A2622] to-[#041412] p-3 rounded-xl border-2 border-emerald-400 shadow-md flex flex-col justify-between space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="text-[11px] font-mono text-emerald-300 uppercase tracking-wider font-bold">ILLUSTRATIVE BOOKING VALUE</span>
+                  <span class="text-[11px] bg-emerald-900 text-emerald-200 px-1.5 py-0.2 rounded font-mono">GROSS VALUE</span>
+                </div>
+                <div class="my-0.5">
+                  <div class="text-2xl font-black text-white font-mono tracking-tight">€561,600</div>
+                  <div class="text-[11px] text-emerald-300 leading-tight">1,080 × €520 blended holiday ABV (3 nights @ €173/nt)</div>
+                </div>
+                <div class="text-[13px] text-amber-300/90 border-t border-emerald-800/60 pt-1 font-medium leading-tight">
+                  ⚠️ Illustrative gross booking value — not net profit or EBITDA.
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Methodological & Attribution Governance Callout -->
+            <div class="bg-[#061211] p-3 rounded-xl border border-slate-800 text-[11px] text-slate-300 space-y-2">
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-2 border-b border-slate-800/80">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-emerald-400 shrink-0">📌</span>
+                  <span><strong>Attribution vs. Incrementality:</strong> Dashboard conversions show correlation; randomized holdouts isolate true causality.</span>
+                </div>
+                <div class="text-[13px] text-amber-300/90 font-mono shrink-0">
+                  ⚠️ Illustrative gross booking value across studio & family suites — not net profit or EBITDA.
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[13px] text-slate-400">
+                <div class="bg-slate-900/60 p-2 rounded-lg border border-slate-800">
+                  <strong class="text-emerald-400 font-mono text-[13px] block mb-0.5">SUTVA & FINITE INVENTORY (GEO-HOLDOUTS):</strong>
+                  In finite holiday inventory, high-demand apartments can sell out to messaged users, artificially suppressing control bookings. In production, we execute <em>matched-market geo-holdouts</em> (e.g. Nuremberg/Leipzig vs. Cologne/Aachen) to prevent stockout cannibalization.
+                </div>
+                <div class="bg-slate-900/60 p-2 rounded-lg border border-slate-800">
+                  <strong class="text-sky-400 font-mono text-[13px] block mb-0.5">OMNICHANNEL CONTROL PROTECTION:</strong>
+                  Holdout users are synced via Customer Match to Google Performance Max and Meta as negative audiences, preventing paid retargeting contamination.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 02 · Executive KPI Scorecard -->
+          <div class="bg-[#0C1A18] border border-emerald-500/30 rounded-2xl p-4 shadow-lg space-y-3">
+            <div class="flex flex-wrap items-center justify-between pb-2 border-b border-emerald-900/40 gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-bold font-mono text-emerald-400 uppercase tracking-wider">02 · EXECUTIVE KPI SCORECARD</span>
+                <span class="text-[11px] bg-slate-800 text-slate-300 border border-slate-700 font-bold px-2 py-0.5 rounded-full font-mono uppercase tracking-wider">PROPOSED TARGETS</span>
+              </div>
+              <span class="text-[13px] font-mono text-slate-400">Track four layers of performance, with targets agreed before launch</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              
+              <!-- Tier 1: Commercial Impact -->
+              <div class="bg-[#061211] border border-emerald-500/30 p-3 rounded-xl space-y-2 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between pb-1.5 border-b border-emerald-900/40">
+                    <span class="text-xs font-bold text-emerald-400 font-mono">TIER 1 · COMMERCIAL</span>
+                    <span class="text-[11px] bg-emerald-950 text-emerald-300 px-1.5 py-0.2 rounded font-mono border border-emerald-800">Impact</span>
+                  </div>
+                  <div class="space-y-1.5 text-[11px] pt-1.5">
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-300">Incremental bookings</span>
+                      <span class="text-[13px] font-mono text-emerald-400 bg-emerald-950 px-1.5 py-0.2 rounded border border-emerald-900">Holdout Lift</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-300">Contribution margin</span>
+                      <span class="text-[13px] font-mono text-slate-400">Net of costs</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-300">Direct booking share</span>
+                      <span class="text-[13px] font-mono text-emerald-400 bg-emerald-950 px-1.5 py-0.2 rounded border border-emerald-900">Direct Shift</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-300">Average stay length</span>
+                      <span class="text-[13px] font-mono text-slate-400">MLOS Yield</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-[13px] text-slate-400 border-t border-slate-800/80 pt-1 mt-1 font-mono">
+                  Target: Shift share & protect ADR
+                </div>
+              </div>
+
+              <!-- Tier 2: Channel Performance -->
+              <div class="bg-[#061211] border border-sky-500/30 p-3 rounded-xl space-y-2 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between pb-1.5 border-b border-sky-900/40">
+                    <span class="text-xs font-bold text-sky-400 font-mono">TIER 2 · CHANNELS</span>
+                    <span class="text-[11px] bg-sky-950 text-sky-300 px-1.5 py-0.2 rounded font-mono border border-sky-800">Funnel</span>
+                  </div>
+                  <div class="space-y-1.5 text-[11px] pt-1.5">
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-300">Click-to-open rate</span>
+                      <span class="text-[13px] font-mono text-sky-300 bg-sky-950 px-1.5 py-0.2 rounded border border-sky-900">Target &gt;15%</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-300">Push engagement</span>
+                      <span class="text-[13px] font-mono text-slate-400">Direct opens</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-300">Checkout completion</span>
+                      <span class="text-[13px] font-mono text-sky-300 bg-sky-950 px-1.5 py-0.2 rounded border border-sky-900">Funnel &gt;50%</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-300">Recovery conversion</span>
+                      <span class="text-[13px] font-mono text-slate-400">Deep link visits</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-[13px] text-slate-400 border-t border-slate-800/80 pt-1 mt-1 font-mono">
+                  Target: Downstream action over vanity opens
+                </div>
+              </div>
+
+              <!-- Tier 3: Guest Operations -->
+              <div class="bg-[#061211] border border-purple-500/30 p-3 rounded-xl space-y-2 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between pb-1.5 border-b border-purple-900/40">
+                    <span class="text-xs font-bold text-purple-400 font-mono">TIER 3 · OPERATIONS</span>
+                    <span class="text-[11px] bg-purple-950 text-purple-300 px-1.5 py-0.2 rounded font-mono border border-purple-800">Arrival</span>
+                  </div>
+                  <div class="space-y-1.5 text-[11px] pt-1.5">
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-300">Digital check-in</span>
+                      <span class="text-[13px] font-mono text-purple-300 bg-purple-950 px-1.5 py-0.2 rounded border border-purple-900">Proposed &gt;90%</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-300">Successful access</span>
+                      <span class="text-[13px] font-mono text-purple-300 bg-purple-950 px-1.5 py-0.2 rounded border border-purple-900">On-time PIN</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-300">Arrival support contacts</span>
+                      <span class="text-[13px] font-mono text-slate-400">Escalation rate</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-300">Keyless door verification</span>
+                      <span class="text-[13px] font-mono text-slate-400">100% SLA</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-[13px] text-slate-400 border-t border-slate-800/80 pt-1 mt-1 font-mono">
+                  Target: Frictionless digital guest arrival
+                </div>
+              </div>
+
+              <!-- Tier 4: Deliverability & Compliance -->
+              <div class="bg-[#061211] border border-rose-500/30 p-3 rounded-xl space-y-2 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between pb-1.5 border-b border-rose-900/40">
+                    <span class="text-xs font-bold text-rose-400 font-mono">TIER 4 · COMPLIANCE</span>
+                    <span class="text-[11px] bg-rose-950 text-rose-300 px-1.5 py-0.2 rounded font-mono border border-rose-800">Reputation</span>
+                  </div>
+                  <div class="space-y-1.5 text-[11px] pt-1.5">
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-300">Spam complaints</span>
+                      <span class="text-[13px] font-mono text-rose-300 bg-rose-950 px-1.5 py-0.2 rounded border border-rose-900">SLA &lt;0.08%</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-300">Hard bounces</span>
+                      <span class="text-[13px] font-mono text-rose-300 bg-rose-950 px-1.5 py-0.2 rounded border border-rose-900">&lt;0.5% Clean</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-300">RFC 8058 Unsubscribe</span>
+                      <span class="text-[13px] font-mono text-emerald-300 bg-emerald-950 px-1.5 py-0.2 rounded border border-emerald-900">1-Click Mandatory</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-300">Domain Auth & Opt-in</span>
+                      <span class="text-[13px] font-mono text-slate-300 font-mono">DMARC / SPF / UWG §7.3</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-[13px] text-slate-400 border-t border-slate-800/80 pt-1 mt-1 font-mono">
+                  Source: Google Postmaster Tools & ESP SLA
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      `,
+      script: ""
+    },
+
+    // STAGE 6: COLLABORATION & 2026 STRATEGY
+      {
+        id: "collaboration",
+        title: "7. Collaboration & The Direct Growth Moat",
+        subtitle: "One holiday strategy. Five teams aligned to turn direct bookings into a long-term growth moat.",
+        html: `
+          <div class="space-y-2">
+            
+            <!-- Zone 1: Cross-Functional Alignment Matrix (5 Team Pillars) -->
+            <div class="bg-[#0C1A18]/90 border border-emerald-500/40 rounded-xl p-2.5 shadow-lg space-y-1.5">
+              <div class="flex flex-wrap items-center justify-between pb-1 border-b border-emerald-900/50 gap-2">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-bold font-mono text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    01 · CROSS-FUNCTIONAL EXECUTION MATRIX
+                  </span>
+                  <span class="text-[9px] bg-emerald-950 text-emerald-300 border border-emerald-700/60 font-bold px-2 py-0.5 rounded-full font-mono uppercase">5 Core Teams</span>
+                </div>
+                <span class="text-[10.5px] font-mono text-slate-400">Turning a commercial concept into an operationally deliverable stay</span>
+              </div>
+
+              <!-- 5 Balanced Team Cards -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 items-stretch">
+                
+                <!-- Team 1: Content & Brand -->
+                <div class="bg-slate-900/90 border border-emerald-500/30 p-2 rounded-lg space-y-1 flex flex-col justify-between hover:border-emerald-400 transition-all">
+                  <div>
+                    <div class="flex items-center justify-between pb-0.5 border-b border-emerald-900/40">
+                      <span class="text-[10px] font-bold text-emerald-400 font-mono">CONTENT &amp; BRAND</span>
+                      <span class="text-[8.5px] bg-emerald-950 text-emerald-300 px-1.5 py-0.2 rounded font-mono border border-emerald-800">Story</span>
+                    </div>
+                    <div class="text-[10.5px] text-white font-bold pt-0.5">Seasonal Storytelling</div>
+                    <div class="text-[9.5px] text-slate-300 leading-snug mt-0.5">Local neighbourhood guides &amp; festive creative assets in DE, EN, and ES.</div>
+                  </div>
+                  <div class="bg-[#081714] p-1 px-1.5 rounded border border-emerald-800/40 mt-1">
+                    <div class="text-[8.5px] font-mono text-emerald-400 uppercase font-bold">Key Deliverable:</div>
+                    <div class="text-[9.5px] text-emerald-200 font-mono font-medium">Approved brand copy &amp; localized creative toolkits by Nov 05.</div>
+                  </div>
+                </div>
+
+                <!-- Team 2: Revenue & Yield -->
+                <div class="bg-slate-900/90 border border-sky-500/30 p-2 rounded-lg space-y-1 flex flex-col justify-between hover:border-sky-400 transition-all">
+                  <div>
+                    <div class="flex items-center justify-between pb-0.5 border-b border-sky-900/40">
+                      <span class="text-[10px] font-bold text-sky-400 font-mono">REVENUE &amp; YIELD</span>
+                      <span class="text-[8.5px] bg-sky-950 text-sky-300 px-1.5 py-0.2 rounded font-mono border border-sky-800">Yield</span>
+                    </div>
+                    <div class="text-[10.5px] text-white font-bold pt-0.5">Inventory &amp; Rate Fences</div>
+                    <div class="text-[9.5px] text-slate-300 leading-snug mt-0.5">3-night MLOS (Dec 23–26) on selected 2-room suites; closed direct member rates.</div>
+                  </div>
+                  <div class="bg-[#081714] p-1 px-1.5 rounded border border-sky-800/40 mt-1">
+                    <div class="text-[8.5px] font-mono text-sky-400 uppercase font-bold">Key Deliverable:</div>
+                    <div class="text-[9.5px] text-sky-200 font-mono font-medium">Property-level rate fences &amp; holiday MLOS rules in PMS.</div>
+                  </div>
+                </div>
+
+                <!-- Team 3: Guest Ops & Care -->
+                <div class="bg-slate-900/90 border border-purple-500/30 p-2 rounded-lg space-y-1 flex flex-col justify-between hover:border-purple-400 transition-all">
+                  <div>
+                    <div class="flex items-center justify-between pb-0.5 border-b border-purple-900/40">
+                      <span class="text-[10px] font-bold text-purple-400 font-mono">GUEST OPS &amp; CARE</span>
+                      <span class="text-[8.5px] bg-purple-950 text-purple-300 px-1.5 py-0.2 rounded font-mono border border-purple-800">Experience</span>
+                    </div>
+                    <div class="text-[10.5px] text-white font-bold pt-0.5">Capacity &amp; 24/7 PIN Support</div>
+                    <div class="text-[9.5px] text-slate-300 leading-snug mt-0.5">25% checkout quota per property matched to local housekeeping rosters.</div>
+                  </div>
+                  <div class="bg-[#081714] p-1 px-1.5 rounded border border-purple-800/40 mt-1">
+                    <div class="text-[8.5px] font-mono text-purple-400 uppercase font-bold">Key Deliverable:</div>
+                    <div class="text-[9.5px] text-purple-200 font-mono font-medium">On-call digital key &amp; PIN escalation active Dec 24–26.</div>
+                  </div>
+                </div>
+
+                <!-- Team 4: Product & MarTech -->
+                <div class="bg-slate-900/90 border border-amber-500/30 p-2 rounded-lg space-y-1 flex flex-col justify-between hover:border-amber-400 transition-all">
+                  <div>
+                    <div class="flex items-center justify-between pb-0.5 border-b border-amber-900/40">
+                      <span class="text-[10px] font-bold text-amber-400 font-mono">PRODUCT &amp; MARTECH</span>
+                      <span class="text-[8.5px] bg-amber-950 text-amber-300 px-1.5 py-0.2 rounded font-mono border border-amber-800">Infra</span>
+                    </div>
+                    <div class="text-[10.5px] text-white font-bold pt-0.5">Telemetry &amp; Deep-Linking</div>
+                    <div class="text-[9.5px] text-slate-300 leading-snug mt-0.5">Braze journey triggers, Branch.io deep links, and negative audience ad sync.</div>
+                  </div>
+                  <div class="bg-[#081714] p-1 px-1.5 rounded border border-amber-800/40 mt-1">
+                    <div class="text-[8.5px] font-mono text-amber-400 uppercase font-bold">Key Deliverable:</div>
+                    <div class="text-[9.5px] text-amber-200 font-mono font-medium">Holdout group tracking &amp; Google/Meta exclusion sync.</div>
+                  </div>
+                </div>
+
+                <!-- Team 5: Legal & Privacy (DPO) -->
+                <div class="bg-slate-900/90 border border-rose-500/30 p-2 rounded-lg space-y-1 flex flex-col justify-between hover:border-rose-400 transition-all">
+                  <div>
+                    <div class="flex items-center justify-between pb-0.5 border-b border-rose-900/40">
+                      <span class="text-[10px] font-bold text-rose-400 font-mono">LEGAL &amp; PRIVACY (DPO)</span>
+                      <span class="text-[8.5px] bg-rose-950 text-rose-300 px-1.5 py-0.2 rounded font-mono border border-rose-800">Compliance</span>
+                    </div>
+                    <div class="text-[10.5px] text-white font-bold pt-0.5">Consent Governance</div>
+                    <div class="text-[9.5px] text-slate-300 leading-snug mt-0.5">Strict GDPR Art. 6/7 consent validation &amp; German UWG §7(3) compliance.</div>
+                  </div>
+                  <div class="bg-[#081714] p-1 px-1.5 rounded border border-rose-800/40 mt-1">
+                    <div class="text-[8.5px] font-mono text-rose-400 uppercase font-bold">Key Deliverable:</div>
+                    <div class="text-[9.5px] text-rose-200 font-mono font-medium">Verified 1st-party opt-in consent for all campaign sends.</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Zone 2: The 2026 Direct Growth Flywheel & Executive Principle -->
+            <div class="bg-[#0C1A18]/90 border border-emerald-500/40 rounded-xl p-2.5 shadow-lg space-y-1.5">
+              <div class="flex flex-wrap items-center justify-between pb-1 border-b border-emerald-900/50 gap-2">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-bold font-mono text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    02 · THE 2026 DIRECT GROWTH FLYWHEEL
+                  </span>
+                  <span class="text-[9px] bg-emerald-950 text-emerald-300 border border-emerald-700/60 font-bold px-2 py-0.5 rounded-full font-mono uppercase">LTV Expansion</span>
+                </div>
+                <span class="text-[10.5px] font-mono text-slate-400">Turning a December holiday stay into a profitable, permanent booking habit</span>
+              </div>
+
+              <!-- 3 Connected Lifecycle Pillars -->
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+                
+                <!-- Pillar 1 -->
+                <div class="bg-slate-900/80 border border-emerald-500/30 p-2 rounded-lg space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[9px] font-mono text-emerald-400 uppercase font-bold tracking-wider">STAGE 01</span>
+                    <span class="text-[8.5px] font-mono text-slate-400">December 2026</span>
+                  </div>
+                  <div class="text-xs font-bold text-white">A Flawless Holiday Stay</div>
+                  <div class="text-[10px] text-slate-300 leading-snug">
+                    Friction-free keyless arrival, deep sleep on a box-spring bed, and a relaxed 1 PM check-out that exceeds expectations.
+                  </div>
+                  <div class="text-[9px] font-mono text-emerald-300 bg-emerald-950/80 px-1.5 py-0.5 rounded border border-emerald-800/40 mt-0.5">
+                    Outcome: High Guest Satisfaction &amp; Trust
+                  </div>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="bg-slate-900/80 border border-emerald-500/30 p-2 rounded-lg space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[9px] font-mono text-emerald-400 uppercase font-bold tracking-wider">STAGE 02</span>
+                    <span class="text-[8.5px] font-mono text-slate-400">Post-Stay · Day +2</span>
+                  </div>
+                  <div class="text-xs font-bold text-white">First-Party Relationship</div>
+                  <div class="text-[10px] text-slate-300 leading-snug">
+                    Automated NPS survey, verified guest review capture, and continuous marketing preference consent inside GuestHub.
+                  </div>
+                  <div class="text-[9px] font-mono text-emerald-300 bg-emerald-950/80 px-1.5 py-0.5 rounded border border-emerald-800/40 mt-0.5">
+                    Outcome: Consented 1st-Party CRM Profile
+                  </div>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="bg-slate-900/80 border border-emerald-500/30 p-2 rounded-lg space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[9px] font-mono text-emerald-400 uppercase font-bold tracking-wider">STAGE 03</span>
+                    <span class="text-[8.5px] font-mono text-slate-400">Spring 2027 · Day +14</span>
+                  </div>
+                  <div class="text-xs font-bold text-white">Direct Repeat Booking</div>
+                  <div class="text-[10px] text-slate-300 leading-snug">
+                    Personalized Spring City-Break incentive in GuestHub, permanently shifting future stays away from 15–18% OTA commissions.
+                  </div>
+                  <div class="text-[9px] font-mono text-emerald-300 bg-emerald-950/80 px-1.5 py-0.5 rounded border border-emerald-800/40 mt-0.5">
+                    Outcome: 100% Margin Retention (€0 OTA Fee)
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Executive Synthesis Banner -->
+              <div class="bg-gradient-to-r from-emerald-950/80 via-emerald-900/60 to-slate-900/90 border border-emerald-500/50 p-1.5 px-3 rounded-lg flex flex-wrap items-center justify-between gap-2 shadow-inner">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs">🏆</span>
+                  <span class="text-[10px] font-mono text-emerald-300 uppercase font-bold tracking-wider">THE STRATEGIC PRINCIPLE:</span>
+                  <span class="text-xs text-white font-bold italic tracking-wide">“Make the stay memorable. Make the next booking direct.”</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-[9px] font-mono text-emerald-300 bg-emerald-900/80 px-2 py-0.5 rounded-full border border-emerald-600/50">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Sustainable 2026 Growth Moat
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        `,
+        script: ""
+    }
+  ];
+
+    // 1. Dynamic Animated Visual Scene for Jana
+    function setDilemmaView(type) {
+      const scene = document.getElementById('dilemmaVisualScene');
+      const btnSofa = document.getElementById('btnSofa');
+      const btnLimehome = document.getElementById('btnLimehome');
+
+      if (!scene || !btnSofa || !btnLimehome) return;
+
+      if (type === 'sofa') {
+        btnSofa.className = "flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all bg-rose-600 text-white shadow-lg flex items-center justify-center gap-1.5 border border-rose-400/40";
+        btnLimehome.className = "flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center gap-1.5 border border-slate-700";
+        scene.className = "flex-1 bg-[#160B10] border border-rose-500/35 rounded-3xl p-5 flex flex-col justify-between shadow-2xl transition-all duration-300 relative overflow-hidden backdrop-blur-md h-full";
+        scene.innerHTML = `
+          <!-- Header of Scene (Clean Editorial, Exact Copy) -->
+          <div class="flex items-center justify-between border-b border-rose-900/40 pb-2.5">
+            <div>
+              <span class="text-xs font-bold text-rose-300 flex items-center gap-1.5 font-mono uppercase tracking-wider">
+                <span>🌙</span> 23:30 · THE LIVING ROOM FOLD-OUT SOFA
+              </span>
+              <div class="text-[13px] text-slate-300 mt-0.5">At her parents’ home: a noisy television, squeaky springs, and no space of her own.</div>
+            </div>
+            <span class="text-[13px] bg-rose-950/90 text-rose-300 px-2.5 py-0.5 rounded-full font-mono border border-rose-800/60 shrink-0">THE HOLIDAY DILEMMA</span>
+          </div>
+
+          <!-- 3-Zone Visual Struggle Cards -->
+          <div class="grid grid-cols-3 gap-3 my-auto py-2">
+            
+            <!-- 1. The Squeaky Sofa -->
+            <div class="bg-gradient-to-b from-[#24101A] to-[#180A11] border border-rose-500/35 rounded-2xl p-3 flex flex-col justify-between items-center text-center shadow-lg">
+              <div class="w-full flex items-center justify-between text-[11px] font-mono text-rose-300/80 border-b border-rose-900/30 pb-1">
+                <span>SLEEP</span>
+                <span class="text-rose-400 font-bold">UNCOMFORTABLE</span>
+              </div>
+              <div class="relative py-2.5 flex items-center justify-center">
+                <svg class="w-24 h-15 text-rose-300" viewBox="0 0 100 65" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="14" y="12" width="34" height="22" rx="3" class="fill-[#381B2B] stroke-rose-400/80" stroke-width="1.8"/>
+                  <rect x="52" y="12" width="34" height="22" rx="3" class="fill-[#381B2B] stroke-rose-400/80" stroke-width="1.8"/>
+                  <rect x="6" y="22" width="10" height="26" rx="3" class="fill-[#452135] stroke-rose-400" stroke-width="1.8"/>
+                  <rect x="84" y="22" width="10" height="26" rx="3" class="fill-[#452135] stroke-rose-400" stroke-width="1.8"/>
+                  <rect x="14" y="34" width="72" height="14" rx="2" class="fill-[#52243E] stroke-rose-300" stroke-width="1.8"/>
+                  <path d="M20 41 Q50 48 80 41" stroke="#f43f5e" stroke-width="1.6" opacity="0.8"/>
+                  <path d="M45 47 Q50 51 55 47 Q50 55 45 59 Q50 63 55 59" stroke="#f43f5e" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="12" y1="48" x2="9" y2="60" stroke-width="2.2" class="stroke-rose-400"/>
+                  <line x1="88" y1="48" x2="91" y2="60" stroke-width="2.2" class="stroke-rose-400"/>
+                </svg>
+              </div>
+              <div class="w-full pt-1 border-t border-rose-900/30">
+                <div class="text-xs font-bold text-white">The Squeaky Sofa</div>
+                <div class="text-[13px] text-rose-300 font-sans mt-0.5 leading-tight">An awkward night's sleep on worn-out springs</div>
+              </div>
+            </div>
+
+            <!-- 2. The Bathroom Queue -->
+            <div class="bg-gradient-to-b from-[#24101A] to-[#180A11] border border-rose-500/35 rounded-2xl p-3 flex flex-col justify-between items-center text-center shadow-lg">
+              <div class="w-full flex items-center justify-between text-[11px] font-mono text-rose-300/80 border-b border-rose-900/30 pb-1">
+                <span>PRIVACY</span>
+                <span class="text-rose-400 font-bold">LIMITED</span>
+              </div>
+              <div class="relative py-2.5 flex items-center justify-center">
+                <svg class="w-24 h-15 text-rose-300" viewBox="0 0 100 65" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="56" y="6" width="36" height="54" rx="2" class="fill-[#1A0A10] stroke-rose-400/80" stroke-width="1.8"/>
+                  <rect x="65" y="14" width="18" height="7" rx="1" class="fill-rose-900 stroke-rose-500" stroke-width="1.2"/>
+                  <circle cx="69" cy="17.5" r="1.8" class="fill-rose-400 animate-pulse"/>
+                  <circle cx="61" cy="34" r="2" class="fill-amber-400"/>
+                  <circle cx="44" cy="22" r="4.5" class="fill-rose-300"/>
+                  <path d="M39 30 L49 30 L47 54 L41 54 Z" class="fill-rose-400/80"/>
+                  <circle cx="30" cy="26" r="4" class="fill-rose-300/80"/>
+                  <path d="M26 33 L34 33 L32 54 L28 54 Z" class="fill-rose-400/60"/>
+                  <circle cx="17" cy="29" r="3.5" class="fill-rose-300/60"/>
+                  <path d="M13 36 L21 36 L20 54 L15 54 Z" class="fill-rose-400/40"/>
+                </svg>
+              </div>
+              <div class="w-full pt-1 border-t border-rose-900/30">
+                <div class="text-xs font-bold text-white">The Bathroom Queue</div>
+                <div class="text-[13px] text-amber-300 font-sans mt-0.5 leading-tight">Three relatives waiting for their turn</div>
+              </div>
+            </div>
+
+            <!-- 3. The Trapped Power Outlet -->
+            <div class="bg-gradient-to-b from-[#24101A] to-[#180A11] border border-rose-500/35 rounded-2xl p-3 flex flex-col justify-between items-center text-center shadow-lg">
+              <div class="w-full flex items-center justify-between text-[11px] font-mono text-rose-300/80 border-b border-rose-900/30 pb-1">
+                <span>CONVENIENCE</span>
+                <span class="text-rose-400 font-bold">LOW BATTERY</span>
+              </div>
+              <div class="relative py-2.5 flex items-center justify-center">
+                <svg class="w-24 h-15 text-rose-300" viewBox="0 0 100 65" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M35 34 L10 54 L60 54 Z" class="fill-[#0D241C] stroke-emerald-600/70" stroke-width="1.5"/>
+                  <path d="M35 18 L16 36 L54 36 Z" class="fill-[#133026] stroke-emerald-500/70" stroke-width="1.5"/>
+                  <path d="M35 6 L22 22 L48 22 Z" class="fill-[#1A3E31] stroke-emerald-400/80" stroke-width="1.5"/>
+                  <rect x="31" y="54" width="8" height="6" class="fill-[#3D2314]"/>
+                  <polygon points="35,2 37,6 42,6 38,9 40,14 35,11 30,14 32,9 28,6 33,6" class="fill-amber-400"/>
+                  <rect x="62" y="14" width="24" height="40" rx="4" class="fill-[#0D1519] stroke-rose-400" stroke-width="1.8" transform="rotate(8 62 14)"/>
+                  <rect x="68" y="24" width="13" height="7" rx="1.5" class="stroke-rose-400" stroke-width="1.2" transform="rotate(8 68 24)"/>
+                  <rect x="69.5" y="25.5" width="3.5" height="4" class="fill-rose-500" transform="rotate(8 69.5 25.5)"/>
+                  <path d="M72 54 Q82 60 92 52" class="stroke-amber-400/80" stroke-dasharray="2 2" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <div class="w-full pt-1 border-t border-rose-900/30">
+                <div class="text-xs font-bold text-white">Trapped Outlet</div>
+                <div class="text-[13px] text-rose-300 font-sans mt-0.5 leading-tight">Phone charger stuck behind the tree</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Narrative Takeaway -->
+          <div class="bg-rose-950/60 border border-rose-800/60 p-3.5 rounded-2xl text-center shadow-lg">
+            <p class="text-xs text-rose-100 leading-relaxed font-semibold">
+              ✨ When festive family joy meets an uncomfortable night's sleep. Nowhere to close the door, and footsteps in the hallway from 6:30 AM.
+            </p>
+          </div></div>
+        `;
+      } else {
+        btnLimehome.className = "flex-1 py-2 px-3.5 rounded-xl text-xs font-bold transition-all bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-950/50 flex items-center justify-center gap-1.5 border border-emerald-400/40 glow-teal";
+        btnSofa.className = "py-2 px-3.5 rounded-xl text-xs font-bold transition-all bg-slate-900 text-slate-300 hover:text-white border border-slate-800 flex items-center justify-center gap-1.5";
+        scene.className = "flex-1 bg-[#0A1B18] border border-emerald-500/40 rounded-3xl p-5 flex flex-col justify-between shadow-2xl transition-all duration-300 relative overflow-hidden glow-teal backdrop-blur-md h-full";
+        scene.innerHTML = `
+          <!-- Header of Scene (Clean Editorial) -->
+          <div class="flex items-center justify-between border-b border-emerald-800/40 pb-2.5">
+            <div>
+              <span class="text-xs font-bold text-emerald-400 flex items-center gap-1.5 font-mono uppercase tracking-wider">
+                <span>✨</span> 23:45 · YOUR OWN SPACE AT LIMEHOME
+              </span>
+              <div class="text-[13px] text-slate-300 mt-0.5">Just a 10-minute walk from her family.</div>
+            </div>
+            <span class="text-[13px] bg-emerald-950 text-emerald-300 px-2.5 py-0.5 rounded-full font-mono border border-emerald-700/60 shrink-0">THE BETTER WAY TO STAY</span>
+          </div>
+
+          <p class="text-xs text-slate-200 leading-relaxed font-normal py-1">
+            Her own private retreat: a peaceful space, a refreshing shower, and a comfortable bed for a restful night's sleep.
+          </p>
+
+          <!-- 3-Zone Personal Space Comfort Cards -->
+          <div class="grid grid-cols-3 gap-3 my-auto py-1">
+            
+            <!-- 1. Box-Spring Bed -->
+            <div class="bg-gradient-to-b from-[#112E29] to-[#0A1E1A] border border-emerald-500/40 rounded-2xl p-3 flex flex-col justify-between items-center text-center shadow-lg">
+              <div class="w-full flex items-center justify-between text-[11px] font-mono text-emerald-300/80 border-b border-emerald-800/40 pb-1">
+                <span>REST</span>
+                <span class="text-emerald-400 font-bold">PREMIUM</span>
+              </div>
+              <div class="relative py-2.5 flex items-center justify-center">
+                <svg class="w-24 h-15 text-emerald-300" viewBox="0 0 100 65" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="15" y="8" width="70" height="28" rx="3" class="fill-[#1A3D36] stroke-emerald-400" stroke-width="1.8"/>
+                  <rect x="20" y="14" width="28" height="14" rx="2" class="fill-[#245249] stroke-emerald-300" stroke-width="1.2"/>
+                  <rect x="52" y="14" width="28" height="14" rx="2" class="fill-[#245249] stroke-emerald-300" stroke-width="1.2"/>
+                  <rect x="12" y="32" width="76" height="22" rx="4" class="fill-[#133830] stroke-emerald-300" stroke-width="1.8"/>
+                  <line x1="18" y1="54" x2="18" y2="62" stroke-width="2.5" class="stroke-amber-400"/>
+                  <line x1="82" y1="54" x2="82" y2="62" stroke-width="2.5" class="stroke-amber-400"/>
+                </svg>
+              </div>
+              <div class="w-full pt-1 border-t border-emerald-800/40">
+                <div class="text-xs font-bold text-white">Box-Spring Bed</div>
+                <div class="text-[13px] text-emerald-300 font-sans mt-0.5 leading-tight">Space to unwind and recharge</div>
+              </div>
+            </div>
+
+            <!-- 2. Rainfall Shower -->
+            <div class="bg-gradient-to-b from-[#112E29] to-[#0A1E1A] border border-emerald-500/40 rounded-2xl p-3 flex flex-col justify-between items-center text-center shadow-lg">
+              <div class="w-full flex items-center justify-between text-[11px] font-mono text-emerald-300/80 border-b border-emerald-800/40 pb-1">
+                <span>WELLNESS</span>
+                <span class="text-emerald-400 font-bold">PRIVATE</span>
+              </div>
+              <div class="relative py-2.5 flex items-center justify-center">
+                <svg class="w-24 h-15 text-emerald-300" viewBox="0 0 100 65" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M30 10 L55 10 L55 20" stroke="currentColor" stroke-width="2.2" class="stroke-emerald-400"/>
+                  <ellipse cx="55" cy="22" rx="14" ry="4" class="fill-[#1A3D36] stroke-emerald-300" stroke-width="1.5"/>
+                  <line x1="46" y1="26" x2="44" y2="48" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="2 3"/>
+                  <line x1="55" y1="26" x2="55" y2="52" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="2 3"/>
+                  <line x1="64" y1="26" x2="66" y2="48" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="2 3"/>
+                  <rect x="25" y="56" width="60" height="5" rx="2" class="fill-[#163B34] stroke-emerald-400" stroke-width="1.2"/>
+                </svg>
+              </div>
+              <div class="w-full pt-1 border-t border-emerald-800/40">
+                <div class="text-xs font-bold text-white">Rainfall Shower</div>
+                <div class="text-[13px] text-emerald-300 font-sans mt-0.5 leading-tight">A refreshing start, on her schedule</div>
+              </div>
+            </div>
+
+            <!-- 3. Kitchenette & Nespresso -->
+            <div class="bg-gradient-to-b from-[#112E29] to-[#0A1E1A] border border-emerald-500/40 rounded-2xl p-3 flex flex-col justify-between items-center text-center shadow-lg">
+              <div class="w-full flex items-center justify-between text-[11px] font-mono text-emerald-300/80 border-b border-emerald-800/40 pb-1">
+                <span>COMFORT</span>
+                <span class="text-amber-400 font-bold">IN-SUITE</span>
+              </div>
+              <div class="relative py-2.5 flex items-center justify-center">
+                <svg class="w-24 h-15 text-emerald-300" viewBox="0 0 100 65" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="25" y="22" width="36" height="34" rx="4" class="fill-[#1A3D36] stroke-emerald-400" stroke-width="1.8"/>
+                  <path d="M38 14 L48 14 L48 22 L38 22 Z" class="fill-[#245249] stroke-amber-400" stroke-width="1.2"/>
+                  <ellipse cx="74" cy="48" rx="12" ry="4" class="fill-[#1A3D36] stroke-emerald-400" stroke-width="1.2"/>
+                  <path d="M66 36 L82 36 L79 48 L69 48 Z" class="fill-[#245249] stroke-emerald-300" stroke-width="1.5"/>
+                  <path d="M82 40 C85 40 87 42 87 44 C87 46 85 47 82 47" stroke-width="1.5" class="stroke-emerald-300"/>
+                  <path d="M72 32 Q74 27 72 22" stroke="rgba(255,255,255,0.6)" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="w-full pt-1 border-t border-emerald-800/40">
+                <div class="text-xs font-bold text-white">Kitchen & Nespresso</div>
+                <div class="text-[13px] text-emerald-300 font-sans mt-0.5 leading-tight">A relaxed morning, without rushing</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Narrative Takeaway -->
+          <div class="bg-emerald-950/70 border border-emerald-600/50 p-3.5 rounded-2xl text-center shadow-lg">
+            <p class="text-xs text-emerald-100 leading-relaxed font-semibold">
+              ✨ She wakes up refreshed. Her parents get the best of her: present, energized, and ready to enjoy another day together.
+            </p>
+          </div></div>
+        `;
+      }
+    }
+
+    function previewChannel(channel) {
+        const screen = document.getElementById('phoneScreenContent');
+        const tag = document.getElementById('simulatorChannelTag');
+        const bEmail = document.getElementById('btnChanEmail');
+        const bPush = document.getElementById('btnChanPush');
+        const bIam = document.getElementById('btnChanIam');
+        const bWa = document.getElementById('btnChanWa');
+
+        if (!screen) return;
+
+        const allBtns = [bEmail, bPush, bIam, bWa];
+        allBtns.forEach(b => {
+          if (b) b.className = "py-2 px-1 rounded-xl text-xs font-bold transition-all bg-slate-900/90 hover:bg-slate-800 text-slate-300 flex items-center justify-center gap-1.5 border border-slate-800 shadow-sm";
+        });
+
+        if (channel === 'email') {
+          if (bEmail) bEmail.className = "py-2 px-1 rounded-xl text-xs font-bold transition-all bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg flex items-center justify-center gap-1.5 border border-emerald-400/50";
+          if (tag) tag.innerHTML = '<span class="text-emerald-400 font-bold">WAVE 01 & 02 HERO EMAIL</span> · Editorial Storytelling: High-converting, non-discounting luxury positioning';
+          screen.innerHTML = `
+            <!-- Mobile Email Header Bar -->
+            <div class="bg-slate-900 text-slate-300 p-2.5 rounded-t-2xl text-[11px] border-b border-slate-800 space-y-1">
+              <div class="flex items-center justify-between text-slate-400">
+                <div class="flex items-center gap-1.5">
+                  <div class="w-4 h-4 rounded-full bg-emerald-600 text-white font-black text-[9px] flex items-center justify-center shadow">lh</div>
+                  <span class="font-bold text-white text-xs">Limehome</span>
+                  <span class="text-[10px] text-slate-400 font-mono">&lt;stay@limehome.com&gt;</span>
+                </div>
+                <span class="text-[10px] font-mono text-slate-400">10:30 AM</span>
+              </div>
+              <div class="text-[10.5px] text-slate-400 truncate">
+                <span class="text-slate-500 font-mono">To:</span> jana.m@example.com
+              </div>
+              <div class="font-bold text-white text-xs pt-0.5 leading-snug">
+                Family for the holidays. Your own space for the night 🎄
+              </div>
+            </div>
+
+            <!-- Email Body Canvas (Crisp Editorial Light Mode) -->
+            <div class="bg-[#FAF9F6] text-slate-900 rounded-b-2xl overflow-hidden shadow-lg border border-slate-300/40 text-left">
+              
+              <!-- Brand Header -->
+              <div class="px-3.5 py-2 flex items-center justify-between border-b border-slate-200/80 bg-white">
+                <div class="flex items-center gap-1">
+                  <span class="font-black text-xs tracking-widest uppercase text-slate-900">L I M E H O M E</span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 mb-0.5"></span>
+                </div>
+                <span class="text-[9px] font-mono text-slate-500 uppercase tracking-wider font-semibold">The Holiday Edit 2026</span>
+              </div>
+
+              <!-- Hero Visual -->
+              <div class="relative h-28 bg-slate-900 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80" alt="Limehome Cologne Suite" class="w-full h-full object-cover brightness-95"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent"></div>
+                <div class="absolute bottom-2 left-3 right-3 text-white">
+                  <span class="text-[8.5px] font-black uppercase tracking-wider bg-emerald-600/95 text-white px-2 py-0.5 rounded-full font-mono shadow">COLOGNE SUITES</span>
+                  <div class="text-xs font-black leading-tight mt-1 drop-shadow-md">Love your family all day.<br/>Protect your sleep all night.</div>
+                </div>
+              </div>
+
+              <!-- Editorial Copy -->
+              <div class="p-3 space-y-2 bg-white">
+                <div class="space-y-1">
+                  <p class="text-xs text-slate-800 leading-relaxed">
+                    <strong>Hi Jana,</strong><br/>
+                    Christmas is about warmth, long dinners, and laughter around the table. But when the night winds down, you shouldn't have to squeeze onto a squeaky fold-out couch.
+                  </p>
+                  <p class="text-[11px] text-slate-600 leading-relaxed">
+                    Retreat to your private design apartment 10 minutes away in Cologne. Wake up refreshed with a box-spring bed, rainfall shower, and slow mornings.
+                  </p>
+                </div>
+
+                <!-- 3 Perk Chips (Value-Add over Discounting) -->
+                <div class="grid grid-cols-3 gap-1.5 py-0.5">
+                  <div class="bg-slate-50 p-1.5 rounded-lg border border-slate-200 text-center">
+                    <div class="text-xs">🛏️</div>
+                    <div class="text-[10px] font-bold text-slate-800 mt-0.5">King Bed</div>
+                    <div class="text-[8.5px] text-slate-500 leading-none">Unbroken sleep</div>
+                  </div>
+                  <div class="bg-emerald-50 p-1.5 rounded-lg border border-emerald-200 text-center">
+                    <div class="text-xs">⏰</div>
+                    <div class="text-[10px] font-bold text-emerald-800 mt-0.5">1 PM Check-Out</div>
+                    <div class="text-[8.5px] text-emerald-600 leading-none">Complimentary</div>
+                  </div>
+                  <div class="bg-slate-50 p-1.5 rounded-lg border border-slate-200 text-center">
+                    <div class="text-xs">☕</div>
+                    <div class="text-[10px] font-bold text-slate-800 mt-0.5">Nespresso Bar</div>
+                    <div class="text-[8.5px] text-slate-500 leading-none">Slow morning</div>
+                  </div>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="pt-0.5">
+                  <button class="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-center rounded-xl font-bold text-xs tracking-wide shadow-md transition-all">
+                    Reserve Your Space in Cologne →
+                  </button>
+                  <div class="text-[9px] text-slate-500 text-center mt-1">
+                    Direct Booker Privilege: 1 PM Late Check-out Included · 15% lower than OTAs
+                  </div>
+                </div>
+              </div>
+
+              <!-- Footer -->
+              <div class="px-3 py-1.5 bg-slate-50 border-t border-slate-200/80 text-[8.5px] text-slate-400 text-center space-y-0.5">
+                <div>Limehome GmbH · Rosenheimer Str. 143 · 81671 Munich</div>
+                <div>You received this because you stayed with Limehome in 2025. <span class="underline">Preferences</span></div>
+              </div>
+            </div>
+          `;
+        } else if (channel === 'push') {
+          if (bPush) bPush.className = "py-2 px-2 rounded-xl text-xs font-bold transition-all bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg flex items-center justify-center gap-1.5 border border-emerald-400/50";
+          if (tag) tag.innerHTML = '<span class="text-emerald-400 font-bold">WAVE 01 & 02 BEHAVIORAL PUSH</span> · High-CTR Lockscreen Hook: Geo-targeted re-engagement trigger';
+          screen.innerHTML = `
+            <!-- iOS 18 Lockscreen Environment -->
+            <div class="relative rounded-2xl overflow-hidden p-3 pt-5 min-h-[380px] flex flex-col justify-between" style="background: linear-gradient(180deg, #091c18 0%, #061311 50%, #030a08 100%);">
+              
+              <!-- Top Lockscreen Status & Time -->
+              <div class="text-center space-y-0.5">
+                <div class="flex items-center justify-center gap-1 text-[10px] text-slate-400 font-mono">
+                  <span>🔒</span>
+                  <span>Friday, December 18</span>
+                </div>
+                <div class="text-4xl font-extralight text-white font-mono tracking-tight drop-shadow-lg">
+                  09:41
+                </div>
+              </div>
+
+              <!-- iOS 18 Rich Push Notification Card (Glassmorphism) -->
+              <div class="bg-slate-900/95 backdrop-blur-xl border border-white/20 rounded-2xl p-3 shadow-2xl text-left space-y-2 mt-2 transition-all hover:scale-[1.01]">
+                
+                <!-- App Header -->
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-1.5">
+                    <div class="w-5 h-5 rounded-lg bg-emerald-600 text-white font-black text-[10px] flex items-center justify-center shadow">
+                      lh
+                    </div>
+                    <span class="text-[11px] font-bold text-white tracking-wide">LIMEHOME</span>
+                    <span class="w-1 h-1 rounded-full bg-slate-400"></span>
+                    <span class="text-[10px] text-slate-400 font-mono">10m ago</span>
+                  </div>
+                  <span class="text-[9px] font-mono text-emerald-400 font-bold bg-emerald-950 px-2 py-0.5 rounded-full border border-emerald-800">Wave 02</span>
+                </div>
+
+                <!-- Notification Content: Copywriter Hook -->
+                <div class="space-y-1">
+                  <div class="text-xs font-bold text-white flex items-center gap-1">
+                    <span>Your Christmas in Cologne: Upgraded 🎄</span>
+                  </div>
+                  <p class="text-[11px] text-slate-300 leading-relaxed">
+                    Love Christmas dinner with family. Skip the squeaky fold-out sofa. Your private suite with a king bed is 10 min away — direct booking includes 1 PM late check-out.
+                  </p>
+                </div>
+
+                <!-- Rich Media Image Preview -->
+                <div class="relative h-20 rounded-xl overflow-hidden border border-slate-700/80 shadow-inner">
+                  <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=500&q=80" alt="Cologne Suite" class="w-full h-full object-cover"/>
+                  <div class="absolute bottom-1 right-1.5 bg-black/75 backdrop-blur-sm text-white text-[9px] px-2 py-0.5 rounded-md font-mono">
+                    Friesenplatz · Cologne
+                  </div>
+                </div>
+
+                <!-- iOS Quick Action Buttons -->
+                <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-slate-800">
+                  <button class="py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-[10.5px] font-bold text-center shadow">
+                    Reserve Cologne Suite →
+                  </button>
+                  <button class="py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-[10.5px] font-semibold text-center border border-slate-700">
+                    Remind Me Later
+                  </button>
+                </div>
+              </div>
+
+              <!-- Bottom Lockscreen Hint -->
+              <div class="pt-3 text-center">
+                <span class="text-[9.5px] font-mono text-slate-400 bg-black/50 px-2.5 py-1 rounded-full border border-slate-800">
+                  📍 Deep-linked into Cologne Friesenplatz inventory
+                </span>
+              </div>
+
+            </div>
+          `;
+        } else if (channel === 'iam') {
+          if (bIam) bIam.className = "py-2 px-2 rounded-xl text-xs font-bold transition-all bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg flex items-center justify-center gap-1.5 border border-emerald-400/50";
+          if (tag) tag.innerHTML = '<span class="text-emerald-400 font-bold">WAVE 02 IN-APP MODAL (IAM)</span> · High-Intent Frictionless Closer: Direct booking bottom sheet in GuestHub';
+          screen.innerHTML = `
+            <!-- Limehome GuestHub App Clean Container -->
+            <div class="bg-slate-900 rounded-2xl overflow-hidden text-left relative flex flex-col justify-between border border-slate-800 shadow-xl">
+              
+              <!-- GuestHub App Top Bar -->
+              <div class="bg-slate-950 px-3 py-2 border-b border-slate-800 flex items-center justify-between text-white shrink-0">
+                <div class="flex items-center gap-1.5">
+                  <div class="w-4 h-4 rounded bg-emerald-600 text-white font-black text-[9px] flex items-center justify-center">lh</div>
+                  <span class="font-bold text-xs tracking-wider">GuestHub</span>
+                </div>
+                <div class="text-[9.5px] font-mono text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-800">
+                  Cologne · Dec 23–26
+                </div>
+              </div>
+
+              <!-- Sleek Bottom Sheet Modal (Self-Contained & Perfectly Scaled) -->
+              <div class="bg-[#FAF9F6] text-slate-900 rounded-2xl shadow-2xl p-3 space-y-2 border-t-2 border-emerald-500 z-10 m-1.5">
+                
+                <!-- Eyebrow Bar: Badge & Clean Date Alignment -->
+                <div class="flex items-center justify-between gap-1">
+                  <span class="text-[9px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded-full font-mono shrink-0">
+                    ★ DIRECT PRIVILEGE
+                  </span>
+                  <span class="text-[9.5px] font-mono text-slate-500 font-semibold truncate">Dec 23–26 · 3 Nights</span>
+                </div>
+
+                <!-- Suite Photo with Price Tag -->
+                <div class="relative h-20 rounded-xl overflow-hidden shadow-sm">
+                  <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=500&q=80" alt="Belgisches Viertel Suite" class="w-full h-full object-cover"/>
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                  <div class="absolute bottom-1 left-2 text-white">
+                    <div class="text-xs font-bold leading-tight">Belgisches Viertel Suite</div>
+                    <div class="text-[9px] text-slate-200">10 min walk to family in Cologne</div>
+                  </div>
+                  <div class="absolute bottom-1 right-2 bg-emerald-600 text-white font-mono font-bold text-xs px-1.5 py-0.5 rounded shadow">
+                    €115 <span class="text-[8.5px] font-normal">/ night</span>
+                  </div>
+                </div>
+
+                <!-- Value Proposition Headline & Copy -->
+                <div class="space-y-0.5">
+                  <div class="text-xs font-black text-slate-900 leading-tight">All-Day Family. Your Own Space at Night.</div>
+                  <p class="text-[10.5px] text-slate-600 leading-snug">
+                    Welcome back, Jana. Spend every joyful moment with family, then retreat to uninterrupted, deep sleep.
+                  </p>
+                </div>
+
+                <!-- Direct Perks Comparison Strip (Margin Friendly) -->
+                <div class="bg-emerald-50/90 border border-emerald-200 rounded-xl p-2 space-y-1 text-[10px]">
+                  <div class="font-bold text-emerald-900 text-[9.5px] uppercase font-mono flex items-center justify-between">
+                    <span>✨ DIRECT BOOKER EXCLUSIVE</span>
+                    <span class="text-emerald-700 font-bold">SAVE €90 vs. OTA</span>
+                  </div>
+                  <div class="text-emerald-800 flex items-center justify-between">
+                    <span>• Guaranteed 1 PM Late Check-out</span>
+                    <span class="font-bold text-emerald-700 uppercase font-mono">Included (€35)</span>
+                  </div>
+                  <div class="text-emerald-800 flex items-center justify-between">
+                    <span>• 100% Digital Keyless Door PIN</span>
+                    <span class="font-bold text-emerald-700 font-mono">Active 24/7</span>
+                  </div>
+                </div>
+
+                <!-- Action Button -->
+                <div class="space-y-1 pt-0.5">
+                  <button class="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-md transition-all flex items-center justify-center gap-1">
+                    <span>Confirm Direct Stay · €345</span>
+                    <span>→</span>
+                  </button>
+                  <div class="text-[9px] text-slate-400 text-center font-mono">
+                    Zero booking fees · Free cancellation until Dec 20
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          `;
+        } else if (channel === 'wa') {
+          if (bWa) bWa.className = "py-2 px-2 rounded-xl text-xs font-bold transition-all bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg flex items-center justify-center gap-1.5 border border-emerald-400/50";
+          if (tag) tag.innerHTML = '<span class="text-emerald-400 font-bold">WAVE 03 OPERATIONAL WHATSAPP</span> · Frictionless VIP Arrival Concierge: Digital PIN & 1 PM check-out confirmed';
+          screen.innerHTML = `
+            <!-- Official WhatsApp Verified Chat Interface -->
+            <div class="bg-[#0b141a] rounded-2xl overflow-hidden text-left relative min-h-[380px] flex flex-col justify-between border border-slate-800 font-sans">
+              
+              <!-- WhatsApp Header Bar -->
+              <div class="bg-[#202c33] text-white p-2.5 flex items-center justify-between border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                  <span class="text-slate-400 text-xs">←</span>
+                  <div class="relative">
+                    <div class="w-7 h-7 rounded-full bg-emerald-600 text-white font-black text-xs flex items-center justify-center shadow">lh</div>
+                    <div class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-[#202c33]"></div>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-1">
+                      <span class="font-bold text-xs text-slate-100">Limehome</span>
+                      <!-- WhatsApp Official Verified Green Badge -->
+                      <svg class="w-3.5 h-3.5 text-emerald-400 inline" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      </svg>
+                    </div>
+                    <div class="text-[9.5px] text-slate-400">Official Business Account</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 text-slate-400 text-xs">
+                  <span>📹</span>
+                  <span>📞</span>
+                  <span>⋮</span>
+                </div>
+              </div>
+
+              <!-- WhatsApp Chat Area -->
+              <div class="p-2.5 space-y-2 flex-1 overflow-y-auto" style="background-color: #0b141a; background-image: radial-gradient(#1f2c34 1px, transparent 1px); background-size: 16px 16px;">
+                
+                <!-- Today Date Bubble -->
+                <div class="text-center my-1">
+                  <span class="bg-[#182229] text-slate-400 text-[9.5px] px-2.5 py-0.5 rounded-full font-mono shadow-sm">
+                    TODAY
+                  </span>
+                </div>
+
+                <!-- Official WhatsApp Interactive Template Bubble -->
+                <div class="max-w-[270px] bg-[#202c33] text-slate-100 rounded-2xl rounded-tl-none shadow-md overflow-hidden border border-slate-700/50 space-y-2">
+                  
+                  <!-- Card Image Header -->
+                  <div class="relative h-20 bg-slate-900">
+                    <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=400&q=80" alt="Limehome Cologne" class="w-full h-full object-cover"/>
+                    <div class="absolute bottom-1 left-2 bg-black/60 backdrop-blur-sm text-white text-[9px] px-1.5 py-0.5 rounded font-mono">
+                      Cologne Friesenplatz
+                    </div>
+                  </div>
+
+                  <!-- Message Text: Frictionless Concierge -->
+                  <div class="p-2.5 space-y-1.5 text-left">
+                    <div class="font-bold text-xs text-white flex items-center gap-1">
+                      <span>🎄 Your Christmas retreat is ready, Jana!</span>
+                    </div>
+                    <p class="text-[11px] text-slate-300 leading-snug">
+                      Everything is set for your stay at <strong>Limehome Cologne Friesenplatz</strong>. Arriving late from family dinner? Your digital key is ready.
+                    </p>
+
+                    <!-- Structured Details Box -->
+                    <div class="bg-[#111b21] p-2 rounded-xl space-y-1 text-[10.5px] border border-slate-700/60 font-mono">
+                      <div class="flex justify-between text-slate-300">
+                        <span class="text-slate-400">📅 Dates:</span>
+                        <span>23 Dec – 26 Dec</span>
+                      </div>
+                      <div class="flex justify-between text-emerald-400">
+                        <span class="text-slate-400">⏰ Check-Out:</span>
+                        <span class="font-bold">1:00 PM (Confirmed)</span>
+                      </div>
+                      <div class="flex justify-between text-slate-300">
+                        <span class="text-slate-400">🔑 Access:</span>
+                        <span>Keyless Door PIN Active</span>
+                      </div>
+                    </div>
+
+                    <p class="text-[10px] text-slate-400 leading-snug">
+                      Tap below to open your building door PIN, directions, and parking details in GuestHub.
+                    </p>
+
+                    <!-- Timestamp & Double Blue Ticks -->
+                    <div class="flex items-center justify-end gap-1 text-[9px] text-slate-400 pt-0.5">
+                      <span>14:22</span>
+                      <span class="text-sky-400 font-bold">✓✓</span>
+                    </div>
+                  </div>
+
+                  <!-- WhatsApp Interactive Quick-Reply Buttons -->
+                  <div class="border-t border-slate-700/80 divide-y divide-slate-700/80">
+                    <button class="w-full py-2 text-emerald-400 hover:bg-slate-700/50 font-bold text-xs text-center flex items-center justify-center gap-1.5 transition-colors">
+                      <span>🔑</span> Open Digital Key &amp; PIN
+                    </button>
+                    <button class="w-full py-2 text-emerald-400 hover:bg-slate-700/50 font-bold text-xs text-center flex items-center justify-center gap-1.5 transition-colors">
+                      <span>📍</span> Directions &amp; Parking Guide
+                    </button>
+                    <button class="w-full py-2 text-emerald-400 hover:bg-slate-700/50 font-semibold text-xs text-center flex items-center justify-center gap-1.5 transition-colors">
+                      <span>💬</span> Chat with Concierge
+                    </button>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          `;
+        }
+      }
+
+      
+      // ==========================================
+      // ==========================================
+      // STAGE 05: UNBIASED SCIENTIFIC A/B LAB
+      // ==========================================
+      let activeExpId = 'offer';
+      let activeExpVariant = 'A';
+
+      function selectExperiment(expId, variant) {
+        activeExpId = expId || 'offer';
+        activeExpVariant = variant || 'A';
+
+        // Update Left Card Selectors (Neutral, Balanced)
+        const cOffer = document.getElementById('expCardOffer');
+        const cCreative = document.getElementById('expCardCreative');
+        const cFriction = document.getElementById('expCardFriction');
+
+        if (cOffer && cCreative && cFriction) {
+          cOffer.className = "p-3.5 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between space-y-1.5 " + 
+            (activeExpId === 'offer' ? "bg-slate-800/90 border-slate-400 text-white shadow-md scale-[1.01]" : "bg-slate-900/80 border-slate-800 hover:border-slate-700 text-slate-300");
+          cCreative.className = "p-3.5 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between space-y-1.5 " + 
+            (activeExpId === 'creative' ? "bg-slate-800/90 border-slate-400 text-white shadow-md scale-[1.01]" : "bg-slate-900/80 border-slate-800 hover:border-slate-700 text-slate-300");
+          cFriction.className = "p-3.5 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between space-y-1.5 " + 
+            (activeExpId === 'friction' ? "bg-slate-800/90 border-slate-400 text-white shadow-md scale-[1.01]" : "bg-slate-900/80 border-slate-800 hover:border-slate-700 text-slate-300");
+        }
+
+        renderExperimentView();
+      }
+
+      function switchExperimentVariant(variant) {
+        activeExpVariant = variant || 'A';
+        renderExperimentView();
+      }
+
+      function renderExperimentView() {
+        const titleEl = document.getElementById('stageExpTitle');
+        const subtitleEl = document.getElementById('stageExpSubtitle');
+        const btnA = document.getElementById('btnExpVarA');
+        const btnB = document.getElementById('btnExpVarB');
+        const canvas = document.getElementById('expVisualCanvas');
+        const decisionStrip = document.getElementById('expDecisionStrip');
+
+        if (!canvas) return;
+
+        // Update Neutral Toggle Buttons
+        if (btnA && btnB) {
+          if (activeExpVariant === 'A') {
+            btnA.className = "px-3 py-1 rounded-lg text-xs font-bold transition-all bg-slate-200 text-slate-950 shadow-md flex items-center gap-1 border border-white";
+            btnB.className = "px-3 py-1 rounded-lg text-xs font-bold transition-all bg-slate-900 hover:bg-slate-800 text-slate-400 flex items-center gap-1 border border-slate-800";
+          } else {
+            btnA.className = "px-3 py-1 rounded-lg text-xs font-bold transition-all bg-slate-900 hover:bg-slate-800 text-slate-400 flex items-center gap-1 border border-slate-800";
+            btnB.className = "px-3 py-1 rounded-lg text-xs font-bold transition-all bg-slate-200 text-slate-950 shadow-md flex items-center gap-1 border border-white";
+          }
+        }
+
+        // ===================================
+        // EXPERIMENT 01: OFFER STRATEGY
+        // ===================================
+        if (activeExpId === 'offer') {
+          if (titleEl) titleEl.textContent = "Test 01: Value Perk Model vs. Price Discount Model";
+          if (subtitleEl) subtitleEl.innerHTML = '<span class="text-slate-300 font-bold font-mono">OFFER STRATEGY TEST</span> · TESTING GUEST VALUE SENSITIVITY';
+          
+          if (activeExpVariant === 'A') {
+            canvas.innerHTML = `
+              <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-1.5">
+                  <div class="flex items-center gap-1.5">
+                    <span class="text-[11px] font-bold text-white uppercase font-mono">VARIANT A · VALUE-ADD PERK MODEL</span>
+                    <span class="text-[9px] bg-slate-800 text-slate-300 px-1.5 py-0.2 rounded font-mono">50% Split</span>
+                  </div>
+                  <span class="text-xs font-mono text-slate-200 font-bold">€115 / night (Rack Rate)</span>
+                </div>
+
+                <div class="flex items-center justify-between text-xs text-slate-300">
+                  <div class="font-bold text-white flex items-center gap-1.5">
+                    <span>🛏️</span> Cologne Friesenplatz · 1-Bedroom Suite
+                  </div>
+                  <span class="text-[10px] font-mono text-slate-400">Dec 23 – 26</span>
+                </div>
+                
+                <!-- Treatment Offer Box -->
+                <div class="bg-slate-900 p-2 rounded-lg border border-slate-800 flex items-center justify-between text-xs">
+                  <div class="flex items-center gap-2">
+                    <span class="text-base">🎁</span>
+                    <div>
+                      <div class="font-bold text-slate-100 text-[11px]">OFFER: Guaranteed 1:00 PM Late Check-Out</div>
+                      <div class="text-[10px] text-slate-400">Free late departure included · Standard rate €115/nt maintained</div>
+                    </div>
+                  </div>
+                  <span class="bg-slate-800 text-slate-200 font-mono text-[9.5px] px-2 py-0.5 rounded border border-slate-700 shrink-0">Perk Model</span>
+                </div>
+
+                <!-- Test Metric Indicators -->
+                <div class="grid grid-cols-3 gap-2 font-mono text-center text-[10px]">
+                  <div class="bg-slate-900/80 p-1 rounded-lg border border-slate-800">
+                    <div class="text-slate-400 text-[9px]">Room Rate</div>
+                    <div class="font-bold text-white mt-0.5">€115.00</div>
+                  </div>
+                  <div class="bg-slate-900/80 p-1 rounded-lg border border-slate-800">
+                    <div class="text-slate-400 text-[9px]">Late Departure</div>
+                    <div class="font-bold text-slate-200 mt-0.5">1:00 PM Confirmed</div>
+                  </div>
+                  <div class="bg-slate-900/80 p-1 rounded-lg border border-slate-800">
+                    <div class="text-slate-400 text-[9px]">Net Contribution Yield</div>
+                    <div class="font-bold text-white mt-0.5">€94.30 / nt</div>
+                  </div>
+                </div>
+              </div>
+            `;
+            if (decisionStrip) {
+              decisionStrip.innerHTML = `
+                <div class="space-y-0.5 text-left">
+                  <div class="font-bold text-white text-[10.5px] flex items-center gap-1">
+                    <span class="text-slate-300 font-mono">⚖️ HYPOTHESIS TESTED:</span>
+                    <span>Guests value schedule flexibility (1 PM check-out) equally to a cash discount.</span>
+                  </div>
+                  <div class="text-slate-400 text-[9.5px] font-mono"><strong>Variant A Wins If:</strong> Booking conversion rate is non-inferior (within 5% of B), delivering higher net margin.</div>
+                </div>
+                <div class="bg-slate-900 text-slate-200 border border-slate-800 px-2.5 py-1 rounded-lg font-mono text-[10px] shrink-0 text-center">
+                  Metric: Net Margin Yield
+                </div>
+              `;
+            }
+          } else {
+            // Variant B
+            canvas.innerHTML = `
+              <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-1.5">
+                  <div class="flex items-center gap-1.5">
+                    <span class="text-[11px] font-bold text-white uppercase font-mono">VARIANT B · 15% PRICE DISCOUNT MODEL</span>
+                    <span class="text-[9px] bg-slate-800 text-slate-300 px-1.5 py-0.2 rounded font-mono">50% Split</span>
+                  </div>
+                  <span class="text-xs font-mono text-slate-200 font-bold"><span class="line-through text-slate-500 mr-1">€115</span> €97.75 / night</span>
+                </div>
+
+                <div class="flex items-center justify-between text-xs text-slate-300">
+                  <div class="font-bold text-white flex items-center gap-1.5">
+                    <span>🏷️</span> Limehome Cologne Friesenplatz · 1-Bedroom Suite
+                  </div>
+                  <span class="text-[10px] font-mono text-slate-400">Dec 23 – 26</span>
+                </div>
+                
+                <!-- Treatment Offer Box -->
+                <div class="bg-slate-900 border border-slate-800 p-2 rounded-lg flex items-center justify-between text-xs">
+                  <div class="flex items-center gap-2">
+                    <span class="text-base">🏷️</span>
+                    <div>
+                      <div class="font-bold text-slate-100 text-[11px]">OFFER: -15% Holiday Flash Rate Cut</div>
+                      <div class="text-[10px] text-slate-400">Price slashed to €97.75/nt · Standard 10:00 AM check-out</div>
+                    </div>
+                  </div>
+                  <span class="bg-slate-800 text-slate-200 font-mono text-[9.5px] px-2 py-0.5 rounded border border-slate-700 shrink-0">Discount Model</span>
+                </div>
+
+                <!-- Test Metric Indicators -->
+                <div class="grid grid-cols-3 gap-2 font-mono text-center text-[10px]">
+                  <div class="bg-slate-900/80 p-1 rounded-lg border border-slate-800">
+                    <div class="text-slate-400 text-[9px]">Room Rate</div>
+                    <div class="font-bold text-white mt-0.5">€97.75</div>
+                  </div>
+                  <div class="bg-slate-900/80 p-1 rounded-lg border border-slate-800">
+                    <div class="text-slate-400 text-[9px]">Late Departure</div>
+                    <div class="font-bold text-slate-400 mt-0.5">Standard 10:00 AM</div>
+                  </div>
+                  <div class="bg-slate-900/80 p-1 rounded-lg border border-slate-800">
+                    <div class="text-slate-400 text-[9px]">Net Contribution Yield</div>
+                    <div class="font-bold text-white mt-0.5">€77.05 / nt</div>
+                  </div>
+                </div>
+              </div>
+            `;
+            if (decisionStrip) {
+              decisionStrip.innerHTML = `
+                <div class="space-y-0.5 text-left">
+                  <div class="font-bold text-white text-[10.5px] flex items-center gap-1">
+                    <span class="text-slate-300 font-mono">⚖️ HYPOTHESIS TESTED:</span>
+                    <span>Direct price discounting overcomes holiday booking hesitation and maximizes volume.</span>
+                  </div>
+                  <div class="text-slate-400 text-[9.5px] font-mono"><strong>Variant B Wins If:</strong> Booking volume increases by &gt; 22.4%, fully offsetting the lower rate per room.</div>
+                </div>
+                <div class="bg-slate-900 text-slate-200 border border-slate-800 px-2.5 py-1 rounded-lg font-mono text-[10px] shrink-0 text-center">
+                  Metric: Total Volume
+                </div>
+              `;
+            }
+          }
+        }
+
+        // ===================================
+        // EXPERIMENT 02: CREATIVE NARRATIVE
+        // ===================================
+        else if (activeExpId === 'creative') {
+          if (titleEl) titleEl.textContent = "Test 02: Emotional Dilemma vs. Functional Specs";
+          if (subtitleEl) subtitleEl.innerHTML = '<span class="text-slate-300 font-bold font-mono">CREATIVE NARRATIVE TEST</span> · TESTING MESSAGE FRAMING';
+
+          if (activeExpVariant === 'A') {
+            canvas.innerHTML = `
+              <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-1.5">
+                  <div class="flex items-center gap-1.5">
+                    <span class="text-[11px] font-bold text-white uppercase font-mono">VARIANT A · EMOTIONAL DILEMMA FRAMING</span>
+                    <span class="text-[9px] bg-slate-800 text-slate-300 px-1.5 py-0.2 rounded font-mono">50% Split</span>
+                  </div>
+                  <span class="text-xs font-mono text-slate-300">Emotional Hook</span>
+                </div>
+
+                <!-- Visual Creative Banner -->
+                <div class="relative h-24 rounded-lg overflow-hidden border border-slate-800 bg-slate-900 flex items-center p-3">
+                  <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=700&q=80" alt="Limehome Bedroom" class="absolute inset-0 w-full h-full object-cover opacity-35"/>
+                  <div class="relative z-10 space-y-0.5">
+                    <span class="bg-slate-800 text-slate-200 text-[8.5px] font-mono font-bold px-2 py-0.2 rounded-full border border-slate-700">HOLIDAY EDIT 2026</span>
+                    <div class="text-xs font-black text-white">"Family for the holidays. Your own space for the night."</div>
+                    <div class="text-[10px] text-slate-300">Celebrate together all day. Retreat to your own quiet bed and bathroom at night.</div>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 text-[10px] font-mono">
+                  <div class="bg-slate-900/80 p-1.5 rounded-lg border border-slate-800 text-slate-300">
+                    <span class="text-slate-400 font-bold block text-[9px]">CORE MESSAGE:</span>
+                    Addresses the tension of visiting family vs. personal comfort.
+                  </div>
+                  <div class="bg-slate-900/80 p-1.5 rounded-lg border border-slate-800 text-slate-300">
+                    <span class="text-slate-400 font-bold block text-[9px]">MEASUREMENT:</span>
+                    Email CTR, Push CTR, and initial landing page engagement.
+                  </div>
+                </div>
+              </div>
+            `;
+            if (decisionStrip) {
+              decisionStrip.innerHTML = `
+                <div class="space-y-0.5 text-left">
+                  <div class="font-bold text-white text-[10.5px] flex items-center gap-1">
+                    <span class="text-slate-300 font-mono">⚖️ HYPOTHESIS TESTED:</span>
+                    <span>Empathizing with holiday comfort tension creates stronger motivation to book.</span>
+                  </div>
+                  <div class="text-slate-400 text-[9.5px] font-mono"><strong>Variant A Wins If:</strong> Click-to-book intent shows a statistically significant lift (p &lt; 0.05).</div>
+                </div>
+                <div class="bg-slate-900 text-slate-200 border border-slate-800 px-2.5 py-1 rounded-lg font-mono text-[10px] shrink-0 text-center">
+                  Metric: Click-to-Book Rate
+                </div>
+              `;
+            }
+          } else {
+            // Variant B
+            canvas.innerHTML = `
+              <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-1.5">
+                  <div class="flex items-center gap-1.5">
+                    <span class="text-[11px] font-bold text-white uppercase font-mono">VARIANT B · FUNCTIONAL FEATURE LISTING</span>
+                    <span class="text-[9px] bg-slate-800 text-slate-300 px-1.5 py-0.2 rounded font-mono">50% Split</span>
+                  </div>
+                  <span class="text-xs font-mono text-slate-300">Functional Hook</span>
+                </div>
+
+                <!-- Visual Creative Banner -->
+                <div class="relative h-24 rounded-lg overflow-hidden border border-slate-800 bg-slate-900 flex items-center p-3">
+                  <div class="space-y-0.5">
+                    <span class="bg-slate-800 text-slate-200 text-[8.5px] font-mono font-bold px-2 py-0.2 rounded-full border border-slate-700">ACCOMMODATION SPECS</span>
+                    <div class="text-xs font-black text-white">"Limehome Cologne: 1-Bedroom Design Apartment"</div>
+                    <div class="text-[10px] text-slate-400">Central location, box-spring king bed, fully equipped kitchen, high-speed WiFi, 24/7 digital key.</div>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 text-[10px] font-mono">
+                  <div class="bg-slate-900/80 p-1.5 rounded-lg border border-slate-800 text-slate-300">
+                    <span class="text-slate-400 font-bold block text-[9px]">CORE MESSAGE:</span>
+                    Emphasizes practical facilities, amenities, and central city location.
+                  </div>
+                  <div class="bg-slate-900/80 p-1.5 rounded-lg border border-slate-800 text-slate-300">
+                    <span class="text-slate-400 font-bold block text-[9px]">MEASUREMENT:</span>
+                    Email CTR, Push CTR, and initial landing page engagement.
+                  </div>
+                </div>
+              </div>
+            `;
+            if (decisionStrip) {
+              decisionStrip.innerHTML = `
+                <div class="space-y-0.5 text-left">
+                  <div class="font-bold text-white text-[10.5px] flex items-center gap-1">
+                    <span class="text-slate-300 font-mono">⚖️ HYPOTHESIS TESTED:</span>
+                    <span>Guests prioritize clear property specifications and amenities over emotional storytelling.</span>
+                  </div>
+                  <div class="text-slate-400 text-[9.5px] font-mono"><strong>Variant B Wins If:</strong> Factual utility messaging yields higher click-through and lower bounce rates.</div>
+                </div>
+                <div class="bg-slate-900 text-slate-200 border border-slate-800 px-2.5 py-1 rounded-lg font-mono text-[10px] shrink-0 text-center">
+                  Metric: Click-to-Book Rate
+                </div>
+              `;
+            }
+          }
+        }
+
+        // ===================================
+        // EXPERIMENT 03: BOOKING FRICTION
+        // ===================================
+        else if (activeExpId === 'friction') {
+          if (titleEl) titleEl.textContent = "Test 03: Pre-Filled Dates vs. Search Discovery Flow";
+          if (subtitleEl) subtitleEl.innerHTML = '<span class="text-slate-300 font-bold font-mono">BOOKING FRICTION TEST</span> · TESTING CHECKOUT FUNNEL UX';
+
+          if (activeExpVariant === 'A') {
+            canvas.innerHTML = `
+              <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-1.5">
+                  <div class="flex items-center gap-1.5">
+                    <span class="text-[11px] font-bold text-white uppercase font-mono">VARIANT A · PRE-FILLED 1-CLICK CHECKOUT</span>
+                    <span class="text-[9px] bg-slate-800 text-slate-300 px-1.5 py-0.2 rounded font-mono">50% Split</span>
+                  </div>
+                  <span class="text-xs font-mono text-slate-300">1 Tap Experience</span>
+                </div>
+
+                <!-- Treatment Flow Box -->
+                <div class="bg-slate-900/80 p-2.5 rounded-xl border border-slate-800 space-y-1.5">
+                  <div class="text-[10.5px] text-slate-300 flex justify-between">
+                    <span><strong>Guest:</strong> Jana M. (Saved Profile)</span>
+                    <span class="text-slate-400 font-mono text-[9.5px]">Dates Pre-Loaded</span>
+                  </div>
+                  <div class="p-1.5 bg-slate-950 rounded-lg border border-slate-800 text-[10px] space-y-0.5 font-mono">
+                    <div class="flex justify-between"><span>Cologne Friesenplatz · 1-Bed</span><span class="text-white font-bold">€115/nt</span></div>
+                    <div class="flex justify-between text-slate-400"><span>Dec 23 – 26 (3 nights)</span><span>Total: €345</span></div>
+                  </div>
+                  <button class="w-full py-1.5 bg-slate-200 text-slate-950 font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 shadow">
+                    <span>Confirm with Apple Pay (1 Tap) →</span>
+                  </button>
+                </div>
+
+                <div class="text-[9.5px] font-mono text-slate-400 text-center">
+                  Funnel Steps: <strong>1 Click</strong> · Date Re-entry Required: <strong>None</strong>
+                </div>
+              </div>
+            `;
+            if (decisionStrip) {
+              decisionStrip.innerHTML = `
+                <div class="space-y-0.5 text-left">
+                  <div class="font-bold text-white text-[10.5px] flex items-center gap-1">
+                    <span class="text-slate-300 font-mono">⚖️ HYPOTHESIS TESTED:</span>
+                    <span>Pre-populating dates from CRM clicks eliminates mobile drop-off and boosts conversion.</span>
+                  </div>
+                  <div class="text-slate-400 text-[9.5px] font-mono"><strong>Variant A Wins If:</strong> Checkout completion rate increases without a corresponding rise in cancellation rate.</div>
+                </div>
+                <div class="bg-slate-900 text-slate-200 border border-slate-800 px-2.5 py-1 rounded-lg font-mono text-[10px] shrink-0 text-center">
+                  Metric: Checkout Completion
+                </div>
+              `;
+            }
+          } else {
+            // Variant B
+            canvas.innerHTML = `
+              <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-1.5">
+                  <div class="flex items-center gap-1.5">
+                    <span class="text-[11px] font-bold text-white uppercase font-mono">VARIANT B · CITY SEARCH DISCOVERY FLOW</span>
+                    <span class="text-[9px] bg-slate-800 text-slate-300 px-1.5 py-0.2 rounded font-mono">50% Split</span>
+                  </div>
+                  <span class="text-xs font-mono text-slate-300">Exploration Flow</span>
+                </div>
+
+                <!-- Treatment Flow Box -->
+                <div class="bg-slate-900/80 p-2.5 rounded-xl border border-slate-800 space-y-1.5">
+                  <div class="text-[11px] font-bold text-slate-300">Cologne Inventory Search (48 Properties)</div>
+                  <div class="grid grid-cols-2 gap-1 text-[9.5px] font-mono text-slate-400">
+                    <div class="p-1 bg-slate-950 border border-slate-800 rounded">Destination: Cologne</div>
+                    <div class="p-1 bg-slate-950 border border-slate-800 rounded">Guests: 1 Adult</div>
+                    <div class="p-1 bg-slate-950 border border-slate-800 rounded">Dates: [ Select Dates ]</div>
+                    <div class="p-1 bg-slate-950 border border-slate-800 rounded">Filters: [ All Types ]</div>
+                  </div>
+                  <button class="w-full py-1 bg-slate-800 text-slate-300 font-semibold rounded text-[11px]">
+                    Browse All Cologne Properties →
+                  </button>
+                </div>
+
+                <div class="text-[9.5px] font-mono text-slate-400 text-center">
+                  Funnel Steps: <strong>4 Steps</strong> · Date Re-entry Required: <strong>Yes (Manual)</strong>
+                </div>
+              </div>
+            `;
+            if (decisionStrip) {
+              decisionStrip.innerHTML = `
+                <div class="space-y-0.5 text-left">
+                  <div class="font-bold text-white text-[10.5px] flex items-center gap-1">
+                    <span class="text-slate-300 font-mono">⚖️ HYPOTHESIS TESTED:</span>
+                    <span>Allowing guests to explore full city inventory leads to better unit fit and higher total stay value.</span>
+                  </div>
+                  <div class="text-slate-400 text-[9.5px] font-mono"><strong>Variant B Wins If:</strong> Broader selection yields higher average basket value despite additional search steps.</div>
+                </div>
+                <div class="bg-slate-900 text-slate-200 border border-slate-800 px-2.5 py-1 rounded-lg font-mono text-[10px] shrink-0 text-center">
+                  Metric: Total Revenue Yield
+                </div>
+              `;
+            }
+          }
+        }
+      }
+function switchTab(index, subView) {
+      currentStage = index;
+      const targetHash = '#' + (index + 1);
+      if (window.location.hash !== targetHash) {
+        history.replaceState(null, null, targetHash);
+      }
+      document.querySelectorAll('.stage-btn').forEach((btn, idx) => {
+        if (idx === index) {
+          btn.className = "stage-btn px-3 py-1 rounded-lg text-xs font-bold transition-all active-festive-tab";
+        } else {
+          btn.className = "stage-btn px-3 py-1 rounded-lg text-xs font-bold transition-all bg-slate-800 text-slate-300 hover:bg-slate-700";
+        }
+      });
+
+      const s = stages[index];
+      const canvas = document.getElementById('interactiveContent');
+      canvas.innerHTML = `
+        <div class="space-y-1 border-b border-slate-800 pb-3">
+          <div class="flex items-center space-x-2">
+            <span class="text-[13px] font-black uppercase tracking-wider text-emerald-400 bg-emerald-950 px-2.5 py-0.5 rounded-full border border-emerald-800 font-mono">STAGE 0${index + 1} · ${index === 0 ? 'HOLIDAY GUEST INSIGHT' : index === 1 ? 'STRATEGIC FRAMEWORK' : index === 2 ? 'AUDIENCE STRATEGY' : index === 3 ? 'THE GUEST JOURNEY' : index === 4 ? 'THE EXPERIMENTATION COCKPIT' : index === 5 ? 'PROVING INCREMENTAL IMPACT' : index === 6 ? 'COLLABORATION & THE DIRECT GROWTH MOAT' : 'INTERACTIVE COCKPIT'}</span>
+          </div>
+          <h2 class="text-xl md:text-2xl font-black text-white tracking-tight">${s.title}</h2>
+          <p class="text-xs text-slate-400">${s.subtitle}</p>
+        </div>
+
+        <div class="pt-2 flex-1">
+          ${s.html}
+        </div>
+      `;
+
+      const scriptEl = document.getElementById('scriptContentText'); if (scriptEl) scriptEl.textContent = s.script;
+
+      if (index === 0) setDilemmaView(subView || 'limehome');
+      if (index === 3) previewChannel(subView || 'email');
+        if (index === 4) selectExperiment(subView || 'offer', 'A');
+    }
+
+    // Keyboard Shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (e.key === 'Escape') {}  else if (e.key >= '1' && e.key <= '7') {
+        switchTab(parseInt(e.key) - 1);
+      } else if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+        if (currentStage < stages.length - 1) switchTab(currentStage + 1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        if (currentStage > 0) switchTab(currentStage - 1);
+      }
+    });
+
+    // High Performance Snowfall Canvas with Toggle & Accessibility
+    let snowEnabled = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let snowAnimId = null;
+
+    function toggleSnow() {
+      snowEnabled = !snowEnabled;
+      const canvas = document.getElementById('snowCanvas');
+      const label = document.getElementById('snowToggleLabel');
+      const btn = document.getElementById('snowToggleBtn');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!snowEnabled) {
+        if (snowAnimId) cancelAnimationFrame(snowAnimId);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (label) label.textContent = 'Snow: Off';
+        if (btn) {
+          btn.classList.replace('text-emerald-400', 'text-slate-400');
+          btn.classList.replace('hover:text-emerald-300', 'hover:text-slate-200');
+        }
+      } else {
+        if (label) label.textContent = 'Snow: On';
+        if (btn) {
+          btn.classList.replace('text-slate-400', 'text-emerald-400');
+          btn.classList.replace('hover:text-slate-200', 'hover:text-emerald-300');
+        }
+        initSnow();
+      }
+    }
+
+    function initSnow() {
+      const canvas = document.getElementById('snowCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      if (!snowEnabled) {
+        ctx.clearRect(0, 0, width, height);
+        return;
+      }
+
+      const snowflakes = [];
+      const flakeCount = 50;
+      for (let i = 0; i < flakeCount; i++) {
+        snowflakes.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 2.2 + 0.8,
+          density: Math.random() * 2,
+          speed: Math.random() * 0.6 + 0.3,
+          swaySpeed: Math.random() * 0.02 + 0.008,
+          swayOffset: Math.random() * Math.PI * 2,
+          opacity: Math.random() * 0.45 + 0.2
+        });
+      }
+
+      let frame = 0;
+      function draw() {
+        if (!snowEnabled) return;
+        ctx.clearRect(0, 0, width, height);
+        frame++;
+        
+        for (let i = 0; i < snowflakes.length; i++) {
+          const f = snowflakes[i];
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(255, 255, 255, ${f.opacity})`;
+          ctx.arc(f.x, f.y, f.radius, 0, Math.PI * 2, true);
+          ctx.fill();
+        }
+        update();
+        snowAnimId = requestAnimationFrame(draw);
+      }
+
+      function update() {
+        for (let i = 0; i < snowflakes.length; i++) {
+          const f = snowflakes[i];
+          f.y += f.speed;
+          f.x += Math.sin(frame * f.swaySpeed + f.swayOffset) * 0.6;
+
+          if (f.y > height + 10) {
+            f.y = -10;
+            f.x = Math.random() * width;
+          }
+          if (f.x > width + 10) f.x = -10;
+          if (f.x < -10) f.x = width + 10;
+        }
+      }
+
+      draw();
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+    }
+
+    // Helper: Parse hash to 0-based stage index supporting both 1-based (#1-#7, #stage-1 to #stage-7) and semantic IDs
+    function parseHashToStage(rawHash) {
+      if (!rawHash) return 0;
+      const clean = rawHash.replace('#', '').toLowerCase().trim();
+      const idMap = {
+        'dilemma': 0, 'insight': 0, 'idea': 0, 'holiday': 0, 'stage1': 0, 'stage-1': 0, 'slide1': 0, 'slide-1': 0,
+        'objectives': 1, 'commercial': 1, 'levers': 1, 'stage2': 1, 'stage-2': 1, 'slide2': 1, 'slide-2': 1,
+        'filterlab': 2, 'audience': 2, 'cohorts': 2, 'stage3': 2, 'stage-3': 2, 'slide3': 2, 'slide-3': 2,
+        'phonesim': 3, 'channels': 3, 'journey': 3, 'waves': 3, 'stage4': 3, 'stage-4': 3, 'slide4': 3, 'slide-4': 3,
+        'abtest': 4, 'testing': 4, 'experiments': 4, 'stage5': 4, 'stage-5': 4, 'slide5': 4, 'slide-5': 4,
+        'measurement': 5, 'incrementality': 5, 'scorecard': 5, 'stage6': 5, 'stage-6': 5, 'slide6': 5, 'slide-6': 5,
+        'collaboration': 6, 'moat': 6, 'teams': 6, 'cross-functional': 6, 'stage7': 6, 'stage-7': 6, 'slide7': 6, 'slide-7': 6
+      };
+      if (idMap[clean] !== undefined) return idMap[clean];
+
+      const stageMatch = clean.match(/^(?:stage|slide)?-?0?([1-7])$/);
+      if (stageMatch) return parseInt(stageMatch[1]) - 1;
+
+      const num = parseInt(clean);
+      if (!isNaN(num)) {
+        if (num >= 1 && num <= stages.length) return num - 1; // #1 -> 0, #2 -> 1, ..., #7 -> 6
+        if (num === 0) return 0;
+      }
+      return 0;
+    }
+
+    // Initialize with Robust 1-Based Hash Support
+    let startIdx = 0;
+    const hashStr = window.location.hash || '';
+    const isLime = hashStr.indexOf('limehome') !== -1;
+    const isPush = hashStr.indexOf('push') !== -1;
+    const isIam = hashStr.indexOf('iam') !== -1;
+    const isWa = hashStr.indexOf('wa') !== -1;
+
+    let subV = null;
+    if (isPush) subV = 'push';
+    else if (isIam) subV = 'iam';
+    else if (isWa) subV = 'whatsapp';
+    else if (isLime) subV = 'limehome';
+
+    if (hashStr) {
+      startIdx = parseHashToStage(hashStr);
+    }
+    switchTab(startIdx, subV);
+    initSnow();
+
+    window.addEventListener('hashchange', () => {
+      const targetIdx = parseHashToStage(window.location.hash);
+      if (targetIdx !== currentStage) {
+        switchTab(targetIdx);
+      }
+    });
+  </script>
+</body>
+</html>
