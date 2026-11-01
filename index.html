@@ -267,9 +267,9 @@
             <div class="bg-[#081514] p-3.5 rounded-2xl border border-emerald-900/50 space-y-2.5">
               <div class="flex items-center justify-between border-b border-emerald-900/40 pb-1.5">
                 <span class="text-xs font-bold text-amber-400 font-mono uppercase tracking-wider flex items-center gap-1.5">
-                  <span>💡</span> THE HOLIDAY ACCOMMODATION GAP (MARKET SIZING)
+                  <span>📊</span> THE MACRO MARKET BEHIND JANA'S DILEMMA
                 </span>
-                <span class="text-[11px] font-mono text-emerald-400">Validated Market Proof</span>
+                <span class="text-[10.5px] font-mono text-emerald-400">17M Holiday Travelers</span>
               </div>
 
               <div class="grid grid-cols-3 gap-2.5 text-center">
@@ -291,12 +291,6 @@
               </div>
             </div>
 
-            <!-- Strategic Footnote Strip -->
-            <div class="p-2.5 bg-emerald-950/40 rounded-xl border border-emerald-800/40 text-[11px] text-emerald-200 flex items-center justify-between">
-              <span>🎯 <strong>THE LIMEHOME OPPORTUNITY:</strong> Design apartment suites offering privacy 10 min from family.</span>
-              <span class="text-[11px] font-mono text-emerald-400 shrink-0 ml-2">Aachen · Leipzig · Cologne</span>
-            </div>
-
           </div>
 
           <!-- Right Side: Animated Visual Scene Stage with Top Switcher (5 cols) -->
@@ -304,11 +298,11 @@
             
             <!-- Switcher Buttons on Top of Right Card -->
             <div class="flex space-x-2 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800">
-              <button onclick="setDilemmaView('limehome')" id="btnLimehome" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all bg-emerald-600 text-white shadow-lg flex items-center justify-center gap-1.5 border border-emerald-400/40">
-                <span>✨</span> Your Own Space
-              </button>
-              <button onclick="setDilemmaView('sofa')" id="btnSofa" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center gap-1.5 border border-slate-700">
+              <button onclick="setDilemmaView('sofa')" id="btnSofa" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all bg-rose-600 text-white shadow-lg flex items-center justify-center gap-1.5 border border-rose-400/40">
                 <span>🛋️</span> The Fold-Out Sofa
+              </button>
+              <button onclick="setDilemmaView('limehome')" id="btnLimehome" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center gap-1.5 border border-slate-700">
+                <span>✨</span> Your Own Space
               </button>
             </div>
 
@@ -2362,7 +2356,7 @@ function switchTab(index, subView) {
 
       const scriptEl = document.getElementById('scriptContentText'); if (scriptEl) scriptEl.textContent = s.script;
 
-      if (index === 0) setDilemmaView(subView || 'limehome');
+      if (index === 0) setDilemmaView(subView || 'sofa');
       if (index === 3) previewChannel(subView || 'email');
         if (index === 4) selectExperiment(subView || 'offer', 'A');
     }
