@@ -922,35 +922,43 @@ The goal isn't to send more messages. It's to make every message more useful.”
       title: "5. Experimentation: What We Test & What We Hope to Learn",
       subtitle: "Three rigorous commercial experiments backed by operational guardrails and deliverability SLAs.",
       html: `
-        <div class="space-y-3.5">
+        <div class="space-y-3">
           <!-- 3-Column Executive Test Grid (Obsidian & Limehome Emerald Theme) -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch">
             
             <!-- Test 01: Protect the Margin -->
-            <div class="bg-[#0C1A18] hover:bg-[#0E201D] border border-emerald-500/30 hover:border-emerald-400/60 rounded-2xl p-4 shadow-lg transition-all duration-300 flex flex-col justify-between space-y-3 group">
-              <div class="space-y-2">
-                <div class="flex items-center justify-between pb-1.5 border-b border-emerald-900/40">
+            <div class="bg-[#0C1A18] hover:bg-[#0E201D] border border-emerald-500/30 hover:border-emerald-400/60 rounded-2xl p-3.5 shadow-lg transition-all duration-300 flex flex-col justify-between space-y-2.5 group">
+              <div>
+                <!-- Card Header -->
+                <div class="flex items-center justify-between pb-1.5 border-b border-emerald-900/40 h-[28px]">
                   <span class="font-bold text-xs font-mono text-emerald-400 group-hover:text-emerald-300 transition-colors">01 · Protect the Margin</span>
                   <span class="text-[9px] bg-emerald-950 text-emerald-300 border border-emerald-700/60 font-bold px-2 py-0.5 rounded-full font-mono uppercase tracking-wider">OFFER TEST</span>
                 </div>
-                <p class="text-[11px] text-slate-300 leading-snug"><strong>Hypothesis:</strong> Guests may value convenience over an upfront cash discount.</p>
                 
-                <!-- Variants Split -->
-                <div class="space-y-2 pt-1">
+                <!-- Fixed Height Hypothesis -->
+                <div class="h-[34px] flex items-center pt-1">
+                  <p class="text-[11px] text-slate-300 leading-snug"><strong>Hypothesis:</strong> Holiday guests prioritize late rest over a cash discount.</p>
+                </div>
+                
+                <!-- Variants Split with Fixed Heights -->
+                <div class="space-y-1.5 pt-1">
                   <!-- Variant A -->
-                  <div class="bg-[#061211] p-2.5 rounded-xl border border-slate-800 text-slate-200 space-y-0.5">
+                  <div class="bg-[#061211] p-2.5 rounded-xl border border-slate-800 text-slate-200 h-[68px] flex flex-col justify-between">
                     <div class="flex items-center justify-between">
                       <span class="text-[9px] text-slate-400 font-mono font-bold uppercase tracking-wider">A · CONTROL</span>
-                      <span class="text-[9px] text-slate-500 font-mono">Standard Discount</span>
+                      <span class="text-[9px] text-rose-400/80 font-mono">Rate Cut</span>
                     </div>
-                    <div class="text-base font-black text-rose-400 font-mono">−15%</div>
-                    <div class="text-[11px] text-slate-400">Save on your holiday stay.</div>
+                    <div class="flex items-baseline justify-between">
+                      <div class="text-lg font-black text-rose-400 font-mono">−15% Discount</div>
+                      <div class="text-[10px] text-slate-400 font-mono">Standard promo</div>
+                    </div>
+                    <div class="text-[10px] text-slate-400 truncate">Dilutes contribution by €17.25/nt.</div>
                   </div>
 
                   <!-- Prominent VS Divider -->
-                  <div class="relative flex items-center justify-center my-2">
+                  <div class="relative flex items-center justify-center my-1.5">
                     <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-amber-500/30"></div></div>
-                    <span class="relative px-3.5 py-0.5 rounded-full bg-[#081514] border-2 border-amber-400 text-amber-300 font-black font-mono text-[11px] uppercase tracking-widest shadow-[0_0_14px_rgba(251,191,36,0.4)] flex items-center gap-1.5">
+                    <span class="relative px-3 py-0.5 rounded-full bg-[#081514] border-2 border-amber-400 text-amber-300 font-black font-mono text-[10.5px] uppercase tracking-widest shadow-[0_0_12px_rgba(251,191,36,0.35)] flex items-center gap-1.5">
                       <span class="text-[9px] text-amber-400">⚡</span>
                       <span>VS</span>
                       <span class="text-[9px] text-amber-400">⚡</span>
@@ -958,49 +966,60 @@ The goal isn't to send more messages. It's to make every message more useful.”
                   </div>
 
                   <!-- Variant B -->
-                  <div class="bg-[#081F1B] p-2.5 rounded-xl border border-emerald-500/40 text-slate-200 space-y-0.5 shadow-sm">
+                  <div class="bg-[#081F1B] p-2.5 rounded-xl border border-emerald-500/40 text-slate-200 h-[68px] flex flex-col justify-between shadow-sm">
                     <div class="flex items-center justify-between">
                       <span class="text-[9px] text-emerald-400 font-mono font-bold uppercase tracking-wider">B · TREATMENT (PERK)</span>
-                      <span class="text-[9px] text-emerald-300/70 font-mono">Controlled Cost</span>
+                      <span class="text-[9px] text-emerald-300 font-mono">Margin Shield</span>
                     </div>
-                    <div class="text-base font-black text-emerald-300 font-mono">1 PM</div>
-                    <div class="text-[11px] text-slate-300">1 PM late checkout (capped @ 25% capacity; dynamic fallback to artisan holiday treat).</div>
+                    <div class="flex items-baseline justify-between">
+                      <div class="text-lg font-black text-emerald-300 font-mono">1:00 PM Check-out</div>
+                      <div class="text-[10px] text-emerald-400/80 font-mono">Full ADR Retained</div>
+                    </div>
+                    <div class="text-[10px] text-slate-300 truncate">Zero rate dilution · Capped @ 25% capacity.</div>
                   </div>
                 </div>
               </div>
 
               <!-- Primary Metric Pill -->
-              <div class="bg-[#061211] p-2.5 rounded-xl border border-emerald-900/50 text-[11px] text-slate-300 flex items-start gap-1.5 mt-auto">
+              <div class="bg-[#061211] p-2 rounded-xl border border-emerald-900/50 text-[10.5px] text-slate-300 flex items-center gap-1.5 mt-2 h-[38px]">
                 <span class="text-emerald-400 shrink-0">🎯</span>
-                <span class="leading-tight"><strong class="text-emerald-400">Primary Metric:</strong> Contribution margin per eligible visitor + booking conversion.</span>
+                <span class="leading-tight truncate"><strong class="text-emerald-400">Primary Metric:</strong> Net contribution margin per stay</span>
               </div>
             </div>
 
             <!-- Test 02: Sell the Feeling -->
-            <div class="bg-[#0C1A18] hover:bg-[#0E201D] border border-emerald-500/30 hover:border-emerald-400/60 rounded-2xl p-4 shadow-lg transition-all duration-300 flex flex-col justify-between space-y-3 group">
-              <div class="space-y-2">
-                <div class="flex items-center justify-between pb-1.5 border-b border-emerald-900/40">
+            <div class="bg-[#0C1A18] hover:bg-[#0E201D] border border-emerald-500/30 hover:border-emerald-400/60 rounded-2xl p-3.5 shadow-lg transition-all duration-300 flex flex-col justify-between space-y-2.5 group">
+              <div>
+                <!-- Card Header -->
+                <div class="flex items-center justify-between pb-1.5 border-b border-emerald-900/40 h-[28px]">
                   <span class="font-bold text-xs font-mono text-emerald-400 group-hover:text-emerald-300 transition-colors">02 · Sell the Feeling</span>
                   <span class="text-[9px] bg-slate-800 text-sky-300 border border-sky-700/60 font-bold px-2 py-0.5 rounded-full font-mono uppercase tracking-wider">CREATIVE TEST</span>
                 </div>
-                <p class="text-[11px] text-slate-300 leading-snug"><strong>Hypothesis:</strong> Emotional relevance outperforms generic feature-led copy.</p>
                 
-                <!-- Variants Split -->
-                <div class="space-y-2 pt-1">
+                <!-- Fixed Height Hypothesis -->
+                <div class="h-[34px] flex items-center pt-1">
+                  <p class="text-[11px] text-slate-300 leading-snug"><strong>Hypothesis:</strong> Addressing sofa dilemma drives higher intent than amenities.</p>
+                </div>
+                
+                <!-- Variants Split with Fixed Heights -->
+                <div class="space-y-1.5 pt-1">
                   <!-- Variant A -->
-                  <div class="bg-[#061211] p-2.5 rounded-xl border border-slate-800 text-slate-200 space-y-0.5">
+                  <div class="bg-[#061211] p-2.5 rounded-xl border border-slate-800 text-slate-200 h-[68px] flex flex-col justify-between">
                     <div class="flex items-center justify-between">
                       <span class="text-[9px] text-slate-400 font-mono font-bold uppercase tracking-wider">A · FUNCTION</span>
-                      <span class="text-[9px] text-slate-500 font-mono">Features</span>
+                      <span class="text-[9px] text-slate-500 font-mono">Amenities</span>
                     </div>
-                    <div class="text-xs font-bold text-slate-200">Designed for your stay</div>
-                    <div class="text-[11px] text-slate-400 leading-tight">Central suites. Kitchen. Keyless entry.</div>
+                    <div class="flex items-baseline justify-between">
+                      <div class="text-base font-bold text-slate-200 font-mono">"Central Suites"</div>
+                      <div class="text-[10px] text-slate-400 font-mono">Feature-led</div>
+                    </div>
+                    <div class="text-[10px] text-slate-400 truncate">Central apartments with kitchens &amp; fast WiFi.</div>
                   </div>
 
                   <!-- Prominent VS Divider -->
-                  <div class="relative flex items-center justify-center my-2">
+                  <div class="relative flex items-center justify-center my-1.5">
                     <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-amber-500/30"></div></div>
-                    <span class="relative px-3.5 py-0.5 rounded-full bg-[#081514] border-2 border-amber-400 text-amber-300 font-black font-mono text-[11px] uppercase tracking-widest shadow-[0_0_14px_rgba(251,191,36,0.4)] flex items-center gap-1.5">
+                    <span class="relative px-3 py-0.5 rounded-full bg-[#081514] border-2 border-amber-400 text-amber-300 font-black font-mono text-[10.5px] uppercase tracking-widest shadow-[0_0_12px_rgba(251,191,36,0.35)] flex items-center gap-1.5">
                       <span class="text-[9px] text-amber-400">⚡</span>
                       <span>VS</span>
                       <span class="text-[9px] text-amber-400">⚡</span>
@@ -1008,49 +1027,60 @@ The goal isn't to send more messages. It's to make every message more useful.”
                   </div>
 
                   <!-- Variant B -->
-                  <div class="bg-[#081F1B] p-2.5 rounded-xl border border-emerald-500/40 text-slate-200 space-y-0.5 shadow-sm">
+                  <div class="bg-[#081F1B] p-2.5 rounded-xl border border-emerald-500/40 text-slate-200 h-[68px] flex flex-col justify-between shadow-sm">
                     <div class="flex items-center justify-between">
                       <span class="text-[9px] text-emerald-400 font-mono font-bold uppercase tracking-wider">B · EMOTION</span>
-                      <span class="text-[9px] text-emerald-300/70 font-mono">Identity Story</span>
+                      <span class="text-[9px] text-emerald-300 font-mono">Identity Story</span>
                     </div>
-                    <div class="text-xs font-bold text-emerald-200">Family for the holidays.</div>
-                    <div class="text-[11px] text-slate-300 leading-tight">Your own space for the night.</div>
+                    <div class="flex items-baseline justify-between">
+                      <div class="text-base font-bold text-emerald-300 font-mono">"Your Own Space"</div>
+                      <div class="text-[10px] text-emerald-400/80 font-mono">Dilemma-led</div>
+                    </div>
+                    <div class="text-[10px] text-slate-300 truncate">Family for the holidays. A quiet room for the night.</div>
                   </div>
                 </div>
               </div>
 
               <!-- Primary Metric Pill -->
-              <div class="bg-[#061211] p-2.5 rounded-xl border border-emerald-900/50 text-[11px] text-slate-300 flex items-start gap-1.5 mt-auto">
+              <div class="bg-[#061211] p-2 rounded-xl border border-emerald-900/50 text-[10.5px] text-slate-300 flex items-center gap-1.5 mt-2 h-[38px]">
                 <span class="text-emerald-400 shrink-0">🎯</span>
-                <span class="leading-tight"><strong class="text-emerald-400">Primary Metric:</strong> Booking conversion + direct revenue per recipient.</span>
+                <span class="leading-tight truncate"><strong class="text-emerald-400">Primary Metric:</strong> Click-to-open (CTOR) + intent booking conversion</span>
               </div>
             </div>
 
             <!-- Test 03: Remove Booking Friction -->
-            <div class="bg-[#0C1A18] hover:bg-[#0E201D] border border-emerald-500/30 hover:border-emerald-400/60 rounded-2xl p-4 shadow-lg transition-all duration-300 flex flex-col justify-between space-y-3 group">
-              <div class="space-y-2">
-                <div class="flex items-center justify-between pb-1.5 border-b border-emerald-900/40">
+            <div class="bg-[#0C1A18] hover:bg-[#0E201D] border border-emerald-500/30 hover:border-emerald-400/60 rounded-2xl p-3.5 shadow-lg transition-all duration-300 flex flex-col justify-between space-y-2.5 group">
+              <div>
+                <!-- Card Header -->
+                <div class="flex items-center justify-between pb-1.5 border-b border-emerald-900/40 h-[28px]">
                   <span class="font-bold text-xs font-mono text-emerald-400 group-hover:text-emerald-300 transition-colors">03 · Remove Booking Friction</span>
                   <span class="text-[9px] bg-slate-800 text-amber-300 border border-amber-700/60 font-bold px-2 py-0.5 rounded-full font-mono uppercase tracking-wider">JOURNEY TEST</span>
                 </div>
-                <p class="text-[11px] text-slate-300 leading-snug"><strong>Hypothesis:</strong> A smoother mobile return journey recovers more bookings.</p>
                 
-                <!-- Variants Split -->
-                <div class="space-y-2 pt-1">
+                <!-- Fixed Height Hypothesis -->
+                <div class="h-[34px] flex items-center pt-1">
+                  <p class="text-[11px] text-slate-300 leading-snug"><strong>Hypothesis:</strong> Pre-populated dates reduce mobile funnel abandonments.</p>
+                </div>
+                
+                <!-- Variants Split with Fixed Heights -->
+                <div class="space-y-1.5 pt-1">
                   <!-- Variant A -->
-                  <div class="bg-[#061211] p-2.5 rounded-xl border border-slate-800 text-slate-200 space-y-0.5">
+                  <div class="bg-[#061211] p-2.5 rounded-xl border border-slate-800 text-slate-200 h-[68px] flex flex-col justify-between">
                     <div class="flex items-center justify-between">
                       <span class="text-[9px] text-slate-400 font-mono font-bold uppercase tracking-wider">A · STANDARD LINK</span>
                       <span class="text-[9px] text-slate-500 font-mono">Web URL</span>
                     </div>
-                    <div class="text-xs font-bold text-slate-200">Email link</div>
-                    <div class="text-[11px] text-slate-400 leading-tight">Return to the website checkout.</div>
+                    <div class="flex items-baseline justify-between">
+                      <div class="text-base font-bold text-slate-200 font-mono">Generic City Search</div>
+                      <div class="text-[10px] text-slate-400 font-mono">3 Steps</div>
+                    </div>
+                    <div class="text-[10px] text-slate-400 truncate">Guest re-enters dates, city, and guests manually.</div>
                   </div>
 
                   <!-- Prominent VS Divider -->
-                  <div class="relative flex items-center justify-center my-2">
+                  <div class="relative flex items-center justify-center my-1.5">
                     <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-amber-500/30"></div></div>
-                    <span class="relative px-3.5 py-0.5 rounded-full bg-[#081514] border-2 border-amber-400 text-amber-300 font-black font-mono text-[11px] uppercase tracking-widest shadow-[0_0_14px_rgba(251,191,36,0.4)] flex items-center gap-1.5">
+                    <span class="relative px-3 py-0.5 rounded-full bg-[#081514] border-2 border-amber-400 text-amber-300 font-black font-mono text-[10.5px] uppercase tracking-widest shadow-[0_0_12px_rgba(251,191,36,0.35)] flex items-center gap-1.5">
                       <span class="text-[9px] text-amber-400">⚡</span>
                       <span>VS</span>
                       <span class="text-[9px] text-amber-400">⚡</span>
@@ -1058,60 +1088,43 @@ The goal isn't to send more messages. It's to make every message more useful.”
                   </div>
 
                   <!-- Variant B -->
-                  <div class="bg-[#081F1B] p-2.5 rounded-xl border border-emerald-500/40 text-slate-200 space-y-0.5 shadow-sm">
+                  <div class="bg-[#081F1B] p-2.5 rounded-xl border border-emerald-500/40 text-slate-200 h-[68px] flex flex-col justify-between shadow-sm">
                     <div class="flex items-center justify-between">
                       <span class="text-[9px] text-emerald-400 font-mono font-bold uppercase tracking-wider">B · DIRECT DEEP LINK</span>
-                      <span class="text-[9px] text-emerald-300/70 font-mono">1-Tap Resume</span>
+                      <span class="text-[9px] text-emerald-300 font-mono">1-Tap Resume</span>
                     </div>
-                    <div class="text-xs font-bold text-emerald-200">Resume booking</div>
-                    <div class="text-[11px] text-slate-300 leading-tight">Return to the saved stay details.</div>
+                    <div class="flex items-baseline justify-between">
+                      <div class="text-base font-bold text-emerald-300 font-mono">Pre-filled GuestHub</div>
+                      <div class="text-[10px] text-emerald-400/80 font-mono">1 Tap</div>
+                    </div>
+                    <div class="text-[10px] text-slate-300 truncate">Cologne dates &amp; member perk pre-loaded.</div>
                   </div>
                 </div>
               </div>
 
               <!-- Primary Metric Pill -->
-              <div class="bg-[#061211] p-2.5 rounded-xl border border-emerald-900/50 text-[11px] text-slate-300 flex items-start gap-1.5 mt-auto">
+              <div class="bg-[#061211] p-2 rounded-xl border border-emerald-900/50 text-[10.5px] text-slate-300 flex items-center gap-1.5 mt-2 h-[38px]">
                 <span class="text-emerald-400 shrink-0">🎯</span>
-                <span class="leading-tight"><strong class="text-emerald-400">Primary Metric:</strong> Recovered bookings + checkout completion rate.</span>
+                <span class="leading-tight truncate"><strong class="text-emerald-400">Primary Metric:</strong> Mobile funnel conversion + checkout completion</span>
               </div>
             </div>
 
           </div>
 
-          <!-- Full-Width Compact Test Governance Strip (Obsidian & Emerald) -->
-          <div class="bg-[#0C1A18] border border-emerald-500/30 rounded-2xl p-3.5 shadow-lg space-y-2">
-            <div class="flex items-center justify-between pb-1.5 border-b border-emerald-900/40">
-              <div class="flex items-center gap-2 font-bold text-xs uppercase tracking-wider text-emerald-400 font-mono">
-                <span>⏱️</span>
-                <span>TEST GOVERNANCE & COMMERCIAL GUARDRAILS</span>
-              </div>
-              <span class="text-[10px] font-mono text-emerald-300/80 bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-800/60">Statistical & Operational SLAs</span>
+          <!-- Compact, Sleek Test Governance Strip (Zero Viewport Overflow) -->
+          <div class="bg-[#0C1A18] border border-emerald-500/30 rounded-xl px-4 py-2.5 shadow-md flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div class="flex items-center gap-2 font-mono">
+              <span class="text-emerald-400 font-bold text-xs uppercase tracking-wider flex items-center gap-1.5">
+                <span>⏱️</span> TEST GOVERNANCE:
+              </span>
+              <span class="text-slate-300 text-[11px]">15k guests/cell (95% statistical power)</span>
+              <span class="text-slate-600">·</span>
+              <span class="text-slate-300 text-[11px]">25% property capacity cap on late check-out</span>
+              <span class="text-slate-600">·</span>
+              <span class="text-slate-300 text-[11px]">Automated kill-switch if unsubscribes exceed 0.08%</span>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-              <div class="flex items-start gap-2 bg-[#061211] p-2.5 rounded-xl border border-slate-800/80">
-                <span class="text-emerald-400 font-bold text-sm shrink-0">✓</span>
-                <div>
-                  <div class="font-bold text-white">Randomized A/B tests</div>
-                  <div class="text-[11px] text-slate-400 leading-snug mt-0.5">Set sample size and test duration before launch; roll out only when results are statistically and commercially convincing.</div>
-                </div>
-              </div>
-              
-              <div class="flex items-start gap-2 bg-[#061211] p-2.5 rounded-xl border border-slate-800/80">
-                <span class="text-emerald-400 font-bold text-sm shrink-0">✓</span>
-                <div>
-                  <div class="font-bold text-white">Margin & operations</div>
-                  <div class="text-[11px] text-slate-400 leading-snug mt-0.5">Check contribution margin, late-checkout capacity, availability, and booking terms.</div>
-                </div>
-              </div>
-
-              <div class="flex items-start gap-2 bg-[#061211] p-2.5 rounded-xl border border-slate-800/80">
-                <span class="text-emerald-400 font-bold text-sm shrink-0">✓</span>
-                <div>
-                  <div class="font-bold text-white">Deliverability & consent</div>
-                  <div class="text-[11px] text-slate-400 leading-snug mt-0.5">Respect channel permissions and predefine pause thresholds for complaints and unsubscribes.</div>
-                </div>
-              </div>
+            <div class="text-[10px] font-mono text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-800 shrink-0">
+              Pre-Launch SLA Guardrails
             </div>
           </div>
         </div>
