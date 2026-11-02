@@ -1219,233 +1219,160 @@ It's to find out what actually works, what it costs, and what we should do next.
       html: `
         <div class="space-y-3.5">
           
-          <!-- 01 · Incrementality Engine (Illustrative Model) -->
-          <div class="bg-[#0C1A18] border border-emerald-500/30 rounded-2xl p-4 shadow-lg space-y-3">
-            <div class="flex flex-wrap items-center justify-between pb-2 border-b border-emerald-900/40 gap-2">
-              <div class="flex items-center gap-2">
-                <span class="text-xs font-bold font-mono text-emerald-400 uppercase tracking-wider">01 · INCREMENTALITY ENGINE</span>
-                <span class="text-[9px] bg-emerald-950 text-emerald-300 border border-emerald-700/60 font-bold px-2 py-0.5 rounded-full font-mono uppercase tracking-wider">ILLUSTRATIVE MODEL</span>
+          <div class="space-y-4">
+          
+          <!-- 01 · Incrementality Engine (Clean, Spacious, Intuitive) -->
+          <div class="bg-gradient-to-br from-[#0F2622] via-[#0A1B18] to-[#071412] border border-emerald-500/35 rounded-3xl p-5 shadow-xl space-y-4">
+            
+            <!-- Header Strip -->
+            <div class="flex flex-wrap items-center justify-between pb-3 border-b border-emerald-900/50 gap-2">
+              <div class="flex items-center gap-2.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="text-xs font-bold font-mono text-emerald-300 uppercase tracking-wider">01 · INCREMENTALITY ENGINE</span>
+                <span class="text-[9.5px] bg-emerald-950/80 text-emerald-400 border border-emerald-700/60 font-semibold px-2.5 py-0.5 rounded-full font-mono">10% RANDOMIZED HOLDOUT</span>
               </div>
-              <span class="text-[10px] font-mono text-slate-400">10% randomized holdout · Measure the bookings caused by the strategy</span>
+              <span class="text-xs font-mono text-slate-400">Isolating true bookings caused by CRM vs. organic demand</span>
             </div>
 
-            <!-- 4-Column Mathematical Flow -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-stretch">
+            <!-- 4-Step Intuitive Lift Flow -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 items-stretch">
               
               <!-- 1. Messaged Group -->
-              <div class="bg-[#061211] p-3 rounded-xl border border-slate-800 flex flex-col justify-between space-y-1">
-                <span class="text-[9px] font-mono text-slate-400 uppercase tracking-wider font-bold">MESSAGED GROUP</span>
-                <div class="my-0.5">
-                  <div class="text-2xl font-black text-white font-mono">90,000</div>
-                  <div class="text-xs font-semibold text-emerald-400 font-mono">3.2% booking rate</div>
+              <div class="bg-[#071614]/90 p-4 rounded-2xl border border-emerald-900/40 flex flex-col justify-between space-y-2">
+                <span class="text-[10px] font-mono text-slate-400 uppercase tracking-wider font-bold">1. Messaged Audience</span>
+                <div>
+                  <div class="text-3xl font-black text-white font-mono tracking-tight">90,000</div>
+                  <div class="text-xs font-semibold text-emerald-400 font-mono mt-0.5">3.2% booking rate</div>
                 </div>
-                <div class="text-[11px] text-slate-300 border-t border-slate-800/80 pt-1 font-mono">
-                  <strong>2,880 bookings</strong>
+                <div class="text-xs text-slate-300 border-t border-emerald-950 pt-2 font-mono flex items-center justify-between">
+                  <span>Total bookings:</span>
+                  <strong class="text-white">2,880</strong>
                 </div>
               </div>
 
-              <!-- 2. Holdout Group -->
-              <div class="bg-[#061211] p-3 rounded-xl border border-amber-500/30 flex flex-col justify-between space-y-1">
+              <!-- 2. Holdout Baseline -->
+              <div class="bg-[#071614]/90 p-4 rounded-2xl border border-amber-500/30 flex flex-col justify-between space-y-2">
                 <div class="flex items-center justify-between">
-                  <span class="text-[9px] font-mono text-amber-400 uppercase tracking-wider font-bold">HOLDOUT GROUP</span>
-                  <span class="text-[8px] bg-amber-950 text-amber-300 px-1.5 py-0.2 rounded font-mono">10% CONTROL</span>
+                  <span class="text-[10px] font-mono text-amber-400 uppercase tracking-wider font-bold">2. Organic Baseline</span>
+                  <span class="text-[8.5px] bg-amber-950 text-amber-300 px-1.5 py-0.5 rounded font-mono font-bold">10% Control</span>
                 </div>
-                <div class="my-0.5">
-                  <div class="text-2xl font-black text-white font-mono">10,000</div>
-                  <div class="text-xs font-semibold text-amber-400 font-mono">2.0% booking rate</div>
+                <div>
+                  <div class="text-3xl font-black text-amber-200 font-mono tracking-tight">2.0%</div>
+                  <div class="text-xs text-slate-300 font-mono mt-0.5">Natural booking rate</div>
                 </div>
-                <div class="text-[11px] text-slate-300 border-t border-slate-800/80 pt-1 font-mono">
-                  <strong>200 bookings</strong> <span class="text-slate-500">(equiv. 1,800 / 90k)</span>
-                </div>
-              </div>
-
-              <!-- 3. Estimated Incremental Bookings -->
-              <div class="bg-[#081F1B] p-3 rounded-xl border border-emerald-500/40 flex flex-col justify-between space-y-1 shadow-sm">
-                <span class="text-[9px] font-mono text-emerald-400 uppercase tracking-wider font-bold">ESTIMATED INCREMENTAL BOOKINGS</span>
-                <div class="my-0.5">
-                  <div class="text-2xl font-black text-emerald-300 font-mono">+1,080</div>
-                  <div class="text-xs font-semibold text-emerald-200 font-mono">+1.2 percentage points</div>
-                </div>
-                <div class="text-[11px] text-emerald-300/80 border-t border-emerald-900/60 pt-1">
-                  Above organic baseline
+                <div class="text-xs text-amber-300/80 border-t border-amber-950 pt-2 font-mono flex items-center justify-between">
+                  <span>Would book anyway:</span>
+                  <strong class="text-amber-200">1,800</strong>
                 </div>
               </div>
 
-              <!-- 4. Illustrative Incremental Booking Value -->
-              <div class="bg-gradient-to-br from-[#0A2622] to-[#041412] p-3 rounded-xl border-2 border-emerald-400 shadow-md flex flex-col justify-between space-y-1">
+              <!-- 3. Incremental Lift -->
+              <div class="bg-gradient-to-br from-[#0C2A24] to-[#071815] p-4 rounded-2xl border border-emerald-400/50 flex flex-col justify-between space-y-2 shadow-lg">
+                <span class="text-[10px] font-mono text-emerald-300 uppercase tracking-wider font-bold">3. Incremental Lift</span>
+                <div>
+                  <div class="text-3xl font-black text-emerald-300 font-mono tracking-tight">+1,080</div>
+                  <div class="text-xs font-semibold text-emerald-200 font-mono mt-0.5">+1.2% net lift over baseline</div>
+                </div>
+                <div class="text-xs text-emerald-300 border-t border-emerald-900/60 pt-2 font-mono font-bold flex items-center justify-between">
+                  <span>Caused by campaign:</span>
+                  <span class="text-white">100% Incremental</span>
+                </div>
+              </div>
+
+              <!-- 4. Value Generated -->
+              <div class="bg-gradient-to-br from-[#10342D] to-[#091D19] p-4 rounded-2xl border-2 border-emerald-400 shadow-xl flex flex-col justify-between space-y-2">
                 <div class="flex items-center justify-between">
-                  <span class="text-[9px] font-mono text-emerald-300 uppercase tracking-wider font-bold">ILLUSTRATIVE BOOKING VALUE</span>
-                  <span class="text-[8px] bg-emerald-900 text-emerald-200 px-1.5 py-0.2 rounded font-mono">GROSS VALUE</span>
+                  <span class="text-[10px] font-mono text-emerald-300 uppercase tracking-wider font-bold">4. Value Generated</span>
+                  <span class="text-[8.5px] bg-emerald-900 text-emerald-200 px-2 py-0.5 rounded font-mono font-bold">Gross Volume</span>
                 </div>
-                <div class="my-0.5">
-                  <div class="text-2xl font-black text-white font-mono tracking-tight">€561,600</div>
-                  <div class="text-[11px] text-emerald-300 leading-tight">1,080 × €520 blended holiday ABV (3 nights @ €173/nt)</div>
+                <div>
+                  <div class="text-3xl font-black text-white font-mono tracking-tight">€561,600</div>
+                  <div class="text-[11px] text-emerald-300/90 leading-snug mt-0.5">1,080 bookings × €520 holiday ABV</div>
                 </div>
-                <div class="text-[9.5px] text-amber-300/90 border-t border-emerald-800/60 pt-1 font-medium leading-tight">
-                  ⚠️ Illustrative gross booking value — not net profit or EBITDA.
+                <div class="text-[10px] text-slate-400 border-t border-emerald-800/50 pt-2 font-mono leading-tight">
+                  Based on 3-night holiday stay
                 </div>
               </div>
 
             </div>
 
-            <!-- Methodological & Attribution Governance Callout -->
-            <div class="bg-[#061211] p-3 rounded-xl border border-slate-800 text-[11px] text-slate-300 space-y-2">
-              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-2 border-b border-slate-800/80">
-                <div class="flex items-center gap-1.5">
-                  <span class="text-emerald-400 shrink-0">📌</span>
-                  <span><strong>Attribution vs. Incrementality:</strong> Dashboard conversions show correlation; randomized holdouts isolate true causality.</span>
-                </div>
-                <div class="text-[10px] text-amber-300/90 font-mono shrink-0">
-                  ⚠️ Illustrative gross booking value across studio & family suites — not net profit or EBITDA.
-                </div>
+            <!-- Sleek Quality Control Strip (Eliminates dense paragraphs) -->
+            <div class="bg-[#05110F]/90 px-4 py-2.5 rounded-xl border border-emerald-950 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-300">
+              <div class="flex items-center gap-2">
+                <span class="text-emerald-400 font-bold">🛡️ Methodological Quality Controls:</span>
+                <span class="text-slate-400 font-mono text-[11px]">Matched-market geo-holdouts prevent stockout cannibalization · Negative Customer Match exclusions protect control group from ad retargeting</span>
               </div>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[10.5px] text-slate-400">
-                <div class="bg-slate-900/60 p-2 rounded-lg border border-slate-800">
-                  <strong class="text-emerald-400 font-mono text-[10px] block mb-0.5">SUTVA & FINITE INVENTORY (GEO-HOLDOUTS):</strong>
-                  In finite holiday inventory, high-demand apartments can sell out to messaged users, artificially suppressing control bookings. In production, we execute <em>matched-market geo-holdouts</em> (e.g. Nuremberg/Leipzig vs. Cologne/Aachen) to prevent stockout cannibalization.
-                </div>
-                <div class="bg-slate-900/60 p-2 rounded-lg border border-slate-800">
-                  <strong class="text-sky-400 font-mono text-[10px] block mb-0.5">OMNICHANNEL CONTROL PROTECTION:</strong>
-                  Holdout users are synced via Customer Match to Google Performance Max and Meta as negative audiences, preventing paid retargeting contamination.
-                </div>
-              </div>
+              <span class="text-[10.5px] font-mono text-emerald-400/90 font-bold shrink-0">95% Statistical Confidence</span>
             </div>
+
           </div>
 
-          <!-- 02 · Executive KPI Scorecard -->
-          <div class="bg-[#0C1A18] border border-emerald-500/30 rounded-2xl p-4 shadow-lg space-y-3">
+          <!-- 02 · Executive KPI Scorecard (Balanced, Clean 4 Pillars) -->
+          <div class="bg-[#0C1A18] border border-emerald-500/25 rounded-2xl p-4 shadow-lg space-y-3">
             <div class="flex flex-wrap items-center justify-between pb-2 border-b border-emerald-900/40 gap-2">
               <div class="flex items-center gap-2">
                 <span class="text-xs font-bold font-mono text-emerald-400 uppercase tracking-wider">02 · EXECUTIVE KPI SCORECARD</span>
-                <span class="text-[9px] bg-slate-800 text-slate-300 border border-slate-700 font-bold px-2 py-0.5 rounded-full font-mono uppercase tracking-wider">PROPOSED TARGETS</span>
+                <span class="text-[9px] bg-slate-800 text-slate-300 border border-slate-700 font-bold px-2 py-0.5 rounded-full font-mono uppercase tracking-wider">GUARDRAIL TARGETS</span>
               </div>
-              <span class="text-[10px] font-mono text-slate-400">Track four layers of performance, with targets agreed before launch</span>
+              <span class="text-[10.5px] font-mono text-slate-400">Four operational pillars agreed with leadership before campaign launch</span>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               
-              <!-- Tier 1: Commercial Impact -->
-              <div class="bg-[#061211] border border-emerald-500/30 p-3 rounded-xl space-y-2 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center justify-between pb-1.5 border-b border-emerald-900/40">
-                    <span class="text-xs font-bold text-emerald-400 font-mono">TIER 1 · COMMERCIAL</span>
-                    <span class="text-[8px] bg-emerald-950 text-emerald-300 px-1.5 py-0.2 rounded font-mono border border-emerald-800">Impact</span>
-                  </div>
-                  <div class="space-y-1.5 text-[11px] pt-1.5">
-                    <div class="flex justify-between items-center">
-                      <span class="text-slate-300">Incremental bookings</span>
-                      <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950 px-1.5 py-0.2 rounded border border-emerald-900">Holdout Lift</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="text-slate-300">Contribution margin</span>
-                      <span class="text-[10px] font-mono text-slate-400">Net of costs</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="text-slate-300">Direct booking share</span>
-                      <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950 px-1.5 py-0.2 rounded border border-emerald-900">Direct Shift</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="text-slate-300">Average stay length</span>
-                      <span class="text-[10px] font-mono text-slate-400">MLOS Yield</span>
-                    </div>
-                  </div>
+              <!-- Tier 1: Commercial -->
+              <div class="bg-[#061211] border border-emerald-500/30 p-3.5 rounded-xl flex flex-col justify-between space-y-2">
+                <div class="flex items-center justify-between pb-1.5 border-b border-emerald-900/40">
+                  <span class="text-xs font-bold text-emerald-400 font-mono">1. COMMERCIAL</span>
+                  <span class="text-[9px] bg-emerald-950 text-emerald-300 px-1.5 py-0.5 rounded font-mono font-bold">Margin Focus</span>
                 </div>
-                <div class="text-[9.5px] text-slate-500 border-t border-slate-800/80 pt-1 mt-1 font-mono">
-                  Target: Shift share & protect ADR
+                <div class="space-y-1.5 text-xs text-slate-300 font-mono">
+                  <div class="flex justify-between"><span>Incremental Bookings:</span> <strong class="text-emerald-400">+1,080</strong></div>
+                  <div class="flex justify-between"><span>Direct Shift:</span> <strong class="text-white">15–18% OTA Fee Saved</strong></div>
+                  <div class="flex justify-between"><span>Rate Protection:</span> <strong class="text-emerald-300">€17.25/nt Retained</strong></div>
                 </div>
+                <div class="text-[9.5px] text-slate-500 border-t border-slate-800/80 pt-1 font-mono">Target: Shift share without discounting</div>
               </div>
 
-              <!-- Tier 2: Channel Performance -->
-              <div class="bg-[#061211] border border-sky-500/30 p-3 rounded-xl space-y-2 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center justify-between pb-1.5 border-b border-sky-900/40">
-                    <span class="text-xs font-bold text-sky-400 font-mono">TIER 2 · CHANNELS</span>
-                    <span class="text-[8px] bg-sky-950 text-sky-300 px-1.5 py-0.2 rounded font-mono border border-sky-800">Funnel</span>
-                  </div>
-                  <div class="space-y-1.5 text-[11px] pt-1.5">
-                    <div class="flex justify-between items-center">
-                      <span class="text-slate-300">Click-to-open rate</span>
-                      <span class="text-[10px] font-mono text-sky-300 bg-sky-950 px-1.5 py-0.2 rounded border border-sky-900">Target &gt;15%</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="text-slate-300">Push engagement</span>
-                      <span class="text-[10px] font-mono text-slate-400">Direct opens</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="text-slate-300">Checkout completion</span>
-                      <span class="text-[10px] font-mono text-sky-300 bg-sky-950 px-1.5 py-0.2 rounded border border-sky-900">Funnel &gt;50%</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="text-slate-300">Recovery conversion</span>
-                      <span class="text-[10px] font-mono text-slate-400">Deep link visits</span>
-                    </div>
-                  </div>
+              <!-- Tier 2: Channels -->
+              <div class="bg-[#061211] border border-sky-500/30 p-3.5 rounded-xl flex flex-col justify-between space-y-2">
+                <div class="flex items-center justify-between pb-1.5 border-b border-sky-900/40">
+                  <span class="text-xs font-bold text-sky-400 font-mono">2. CHANNELS</span>
+                  <span class="text-[9px] bg-sky-950 text-sky-300 px-1.5 py-0.5 rounded font-mono font-bold">Funnel Health</span>
                 </div>
-                <div class="text-[9.5px] text-slate-500 border-t border-slate-800/80 pt-1 mt-1 font-mono">
-                  Target: Downstream action over vanity opens
+                <div class="space-y-1.5 text-xs text-slate-300 font-mono">
+                  <div class="flex justify-between"><span>Click-to-Open Rate:</span> <strong class="text-sky-300">&gt;15%</strong></div>
+                  <div class="flex justify-between"><span>In-App Sheet Tap:</span> <strong class="text-white">Direct Checkout</strong></div>
+                  <div class="flex justify-between"><span>Checkout Completion:</span> <strong class="text-sky-300">&gt;50%</strong></div>
                 </div>
+                <div class="text-[9.5px] text-slate-500 border-t border-slate-800/80 pt-1 font-mono">Target: Downstream action over vanity opens</div>
               </div>
 
-              <!-- Tier 3: Guest Operations -->
-              <div class="bg-[#061211] border border-purple-500/30 p-3 rounded-xl space-y-2 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center justify-between pb-1.5 border-b border-purple-900/40">
-                    <span class="text-xs font-bold text-purple-400 font-mono">TIER 3 · OPERATIONS</span>
-                    <span class="text-[8px] bg-purple-950 text-purple-300 px-1.5 py-0.2 rounded font-mono border border-purple-800">Arrival</span>
-                  </div>
-                  <div class="space-y-1.5 text-[11px] pt-1.5">
-                    <div class="flex justify-between items-center">
-                      <span class="text-slate-300">Digital check-in</span>
-                      <span class="text-[10px] font-mono text-purple-300 bg-purple-950 px-1.5 py-0.2 rounded border border-purple-900">Proposed &gt;90%</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="text-slate-300">Successful access</span>
-                      <span class="text-[10px] font-mono text-purple-300 bg-purple-950 px-1.5 py-0.2 rounded border border-purple-900">On-time PIN</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="text-slate-300">Arrival support contacts</span>
-                      <span class="text-[10px] font-mono text-slate-400">Escalation rate</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="text-slate-300">Keyless door verification</span>
-                      <span class="text-[10px] font-mono text-slate-400">100% SLA</span>
-                    </div>
-                  </div>
+              <!-- Tier 3: Operations -->
+              <div class="bg-[#061211] border border-purple-500/30 p-3.5 rounded-xl flex flex-col justify-between space-y-2">
+                <div class="flex items-center justify-between pb-1.5 border-b border-purple-900/40">
+                  <span class="text-xs font-bold text-purple-400 font-mono">3. OPERATIONS</span>
+                  <span class="text-[9px] bg-purple-950 text-purple-300 px-1.5 py-0.5 rounded font-mono font-bold">Guest Arrival</span>
                 </div>
-                <div class="text-[9.5px] text-slate-500 border-t border-slate-800/80 pt-1 mt-1 font-mono">
-                  Target: Frictionless digital guest arrival
+                <div class="space-y-1.5 text-xs text-slate-300 font-mono">
+                  <div class="flex justify-between"><span>Digital Check-in:</span> <strong class="text-purple-300">&gt;90% Completed</strong></div>
+                  <div class="flex justify-between"><span>Keyless PIN Access:</span> <strong class="text-white">100% On-Time</strong></div>
+                  <div class="flex justify-between"><span>Late Checkout Cap:</span> <strong class="text-purple-300">25% Capacity</strong></div>
                 </div>
+                <div class="text-[9.5px] text-slate-500 border-t border-slate-800/80 pt-1 font-mono">Target: Housekeeping turnaround protected</div>
               </div>
 
-              <!-- Tier 4: Deliverability & Compliance -->
-              <div class="bg-[#061211] border border-rose-500/30 p-3 rounded-xl space-y-2 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center justify-between pb-1.5 border-b border-rose-900/40">
-                    <span class="text-xs font-bold text-rose-400 font-mono">TIER 4 · COMPLIANCE</span>
-                    <span class="text-[8px] bg-rose-950 text-rose-300 px-1.5 py-0.2 rounded font-mono border border-rose-800">Reputation</span>
-                  </div>
-                  <div class="space-y-1.5 text-[11px] pt-1.5">
-                    <div class="flex justify-between items-center">
-                      <span class="text-slate-300">Spam complaints</span>
-                      <span class="text-[10px] font-mono text-rose-300 bg-rose-950 px-1.5 py-0.2 rounded border border-rose-900">SLA &lt;0.08%</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="text-slate-300">Hard bounces</span>
-                      <span class="text-[10px] font-mono text-rose-300 bg-rose-950 px-1.5 py-0.2 rounded border border-rose-900">&lt;0.5% Clean</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="text-slate-300">RFC 8058 Unsubscribe</span>
-                      <span class="text-[10px] font-mono text-emerald-300 bg-emerald-950 px-1.5 py-0.2 rounded border border-emerald-900">1-Click Mandatory</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="text-slate-300">Domain Auth & Opt-in</span>
-                      <span class="text-[10px] font-mono text-slate-300 font-mono">DMARC / SPF / UWG §7.3</span>
-                    </div>
-                  </div>
+              <!-- Tier 4: Compliance -->
+              <div class="bg-[#061211] border border-rose-500/30 p-3.5 rounded-xl flex flex-col justify-between space-y-2">
+                <div class="flex items-center justify-between pb-1.5 border-b border-rose-900/40">
+                  <span class="text-xs font-bold text-rose-400 font-mono">4. COMPLIANCE</span>
+                  <span class="text-[9px] bg-rose-950 text-rose-300 px-1.5 py-0.5 rounded font-mono font-bold">Reputation</span>
                 </div>
-                <div class="text-[9.5px] text-slate-500 border-t border-slate-800/80 pt-1 mt-1 font-mono">
-                  Source: Google Postmaster Tools & ESP SLA
+                <div class="space-y-1.5 text-xs text-slate-300 font-mono">
+                  <div class="flex justify-between"><span>Spam Complaints:</span> <strong class="text-rose-300">&lt;0.08% SLA</strong></div>
+                  <div class="flex justify-between"><span>Hard Bounces:</span> <strong class="text-white">&lt;0.5% Clean</strong></div>
+                  <div class="flex justify-between"><span>Opt-out &amp; Legal:</span> <strong class="text-rose-300">1-Click RFC 8058</strong></div>
                 </div>
+                <div class="text-[9.5px] text-slate-500 border-t border-slate-800/80 pt-1 font-mono">Target: Protect sender domain health</div>
               </div>
 
             </div>
