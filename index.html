@@ -161,11 +161,11 @@
       </button>
     </nav>
 
-    <!-- Clean Script Trigger -->
+    <!-- Festive Atmosphere Control -->
     <div class="flex items-center space-x-2">
-      <button onclick="toggleScriptDrawer()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white font-medium px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 border border-slate-700 shadow-sm">
-        <span>🎙️</span>
-        <span id="scriptToggleLabel">Spoken Script</span>
+      <button onclick="toggleSnow()" id="btnSnow" class="text-xs bg-slate-800/90 hover:bg-slate-700 text-slate-300 hover:text-white font-mono px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 border border-slate-700 shadow-sm">
+        <span>❄️</span>
+        <span id="snowToggleLabel">Snow: On</span>
       </button>
     </div>
   </header>
@@ -180,86 +180,7 @@
       </div>
     </main>
 
-    <!-- Right Drawer: Spoken Words Teleprompter -->
-    <aside id="scriptDrawer" class="w-[34%] min-w-[350px] max-w-[460px] bg-[#0A1211] border-l border-emerald-900/40 p-6 flex flex-col justify-between overflow-y-auto hidden">
-      <div class="space-y-4">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-          <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
-            <span>🗣️</span> WHAT TO SAY (Spoken Words)
-          </span>
-          <span class="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded font-mono">100% Human Script</span>
-        </div>
-        <div id="scriptContentText" class="text-slate-200 text-sm leading-relaxed whitespace-pre-line font-normal space-y-3">
-          <!-- Injected by JS -->
-        </div>
-
-        <!-- Executive Q&A Defense Playbook (Always accessible during presentation) -->
-        <div class="mt-6 pt-4 border-t border-emerald-900/40 space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-black text-amber-300 uppercase tracking-wider font-mono flex items-center gap-1.5">
-              <span>🥊</span> EXECUTIVE Q&A PLAYBOOK (5 HARD QUESTIONS)
-            </span>
-            <span class="text-[9px] bg-amber-950 text-amber-300 px-1.5 py-0.5 rounded font-mono border border-amber-800">Panel Defense</span>
-          </div>
-
-          <div class="space-y-2.5 text-xs">
-            <!-- Q1: CEO on Late Checkout Costs -->
-            <div class="bg-slate-900/90 p-2.5 rounded-xl border border-slate-800 space-y-1">
-              <div class="font-bold text-amber-300 text-[11.5px] flex items-center gap-1">
-                <span>👔 CEO:</span> "Doesn't Boxing Day late checkout increase cleaning costs?"
-              </div>
-              <p class="text-slate-300 text-[11px] leading-relaxed">
-                <strong>Your Answer:</strong> "We place a strict <strong>25% inventory cap</strong> per building with City Ops. If a property is at cleaning capacity, CRM automatically pivots the perk to a curated local welcome treat and 24h flexible cancellation. Zero cleaner overtime costs."
-              </p>
-            </div>
-
-            <!-- Q2: CEO on Incrementality vs Natural Peak -->
-            <div class="bg-slate-900/90 p-2.5 rounded-xl border border-slate-800 space-y-1">
-              <div class="font-bold text-amber-300 text-[11.5px] flex items-center gap-1">
-                <span>👔 CEO:</span> "Isn't +1.2% lift unrealistic during peak Christmas rush?"
-              </div>
-              <p class="text-slate-300 text-[11px] leading-relaxed">
-                <strong>Your Answer:</strong> "Centrals like Berlin fill naturally, but <strong>secondary hometown corridors</strong> (Aachen, Leipzig, residential Cologne) suffer quiet mid-week gaps. We unlock new demand by winning the <strong>14% sofa-bed demographic</strong> who would never book a traditional hotel."
-              </p>
-            </div>
-
-            <!-- Q3: Franziska on WhatsApp Spam Risk -->
-            <div class="bg-slate-900/90 p-2.5 rounded-xl border border-slate-800 space-y-1">
-              <div class="font-bold text-sky-300 text-[11.5px] flex items-center gap-1">
-                <span>📊 Franziska:</span> "Isn't WhatsApp cart recovery high-risk for spam?"
-              </div>
-              <p class="text-slate-300 text-[11px] leading-relaxed">
-                <strong>Your Answer:</strong> "Strictly gated: only for <strong>authenticated app users</strong> who reached final payment review and consented to WhatsApp. Capped to exactly <strong>1 send per season</strong> with a 2-hour conversion window."
-              </p>
-            </div>
-
-            <!-- Q4: Franziska on Holdout Revenue Sacrifice -->
-            <div class="bg-slate-900/90 p-2.5 rounded-xl border border-slate-800 space-y-1">
-              <div class="font-bold text-sky-300 text-[11.5px] flex items-center gap-1">
-                <span>📊 Franziska:</span> "Does a 10% holdout sacrifice €42k in holiday revenue?"
-              </div>
-              <p class="text-slate-300 text-[11px] leading-relaxed">
-                <strong>Your Answer:</strong> "We use a <strong>rolling holdout</strong>: uncontacted holdout profiles are held for the first 10 days to prove statistical lift (p < 0.05), then released into the Wave 2 urgency broadcast to capture revenue."
-              </p>
-            </div>
-
-            <!-- Q5: Silvena on Cultural Localization -->
-            <div class="bg-slate-900/90 p-2.5 rounded-xl border border-slate-800 space-y-1">
-              <div class="font-bold text-emerald-300 text-[11.5px] flex items-center gap-1">
-                <span>🎨 Silvena:</span> "How does Jana's story translate to Spain or the UK?"
-              </div>
-              <p class="text-slate-300 text-[11px] leading-relaxed">
-                <strong>Your Answer:</strong> "DACH focuses on Adventszeit and family sofa-beds. Spain extends to <strong>Día de los Reyes (Jan 6)</strong> with winter sun in Andalusia. UK/Expats focus on <strong>Boxing Day retreats</strong> and multi-day holiday hosting relief."
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="pt-4 border-t border-slate-800 text-[11px] text-slate-400 flex items-center justify-between">
-        <span>Press <kbd class="bg-slate-800 px-1.5 py-0.5 rounded text-white border border-slate-700">Space</kbd> or <kbd class="bg-slate-800 px-1.5 py-0.5 rounded text-white border border-slate-700">S</kbd></span>
-        <button onclick="toggleScriptDrawer()" class="text-rose-400 hover:underline">Close ✕</button>
-      </div>
-    </aside>
+    
 
   </div>
 
@@ -2161,22 +2082,13 @@ Thank you.”
         </div>
       `;
 
-      document.getElementById('scriptContentText').textContent = s.script;
+      // script drawer removed for clean presentation
 
       if (index === 0) setDilemmaView(subView || 'limehome');
       if (index === 3) previewChannel(subView || 'email');
     }
 
-    // Toggle Script Drawer
-    function toggleScriptDrawer() {
-      const drawer = document.getElementById('scriptDrawer');
-      const label = document.getElementById('scriptToggleLabel');
-      isScriptOpen = !isScriptOpen;
-
-      if (isScriptOpen) {
-        drawer.classList.remove('hidden');
-        label.textContent = "Hide Spoken Script";
-      } else {
+     else {
         drawer.classList.add('hidden');
         label.textContent = "Show Spoken Script";
       }
@@ -2187,9 +2099,10 @@ Thank you.”
       if (e.target.tagName === 'INPUT') return;
       if (e.key >= '1' && e.key <= '7') {
         switchTab(parseInt(e.key) - 1);
-      } else if (e.key === ' ' || e.key === 's' || e.key === 'S') {
+      } else if (e.key === ' ') {
         e.preventDefault();
-        toggleScriptDrawer();
+        if (currentStage < stages.length - 1) switchTab(currentStage + 1);
+        else switchTab(0);
       } else if (e.key === 'ArrowRight') {
         if (currentStage < stages.length - 1) switchTab(currentStage + 1);
       } else if (e.key === 'ArrowLeft') {
@@ -2198,6 +2111,22 @@ Thank you.”
     });
 
     // High Performance Smooth Snowfall Canvas Engine
+    
+    // Toggle Snowfall Animation
+    let snowActive = true;
+    function toggleSnow() {
+      const canvas = document.getElementById('snowCanvas');
+      const label = document.getElementById('snowToggleLabel');
+      snowActive = !snowActive;
+      if (snowActive) {
+        canvas.style.display = 'block';
+        if (label) label.textContent = 'Snow: On';
+      } else {
+        canvas.style.display = 'none';
+        if (label) label.textContent = 'Snow: Off';
+      }
+    }
+
     function initSnow() {
       const canvas = document.getElementById('snowCanvas');
       const ctx = canvas.getContext('2d');
